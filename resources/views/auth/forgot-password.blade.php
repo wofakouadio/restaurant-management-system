@@ -1,5 +1,5 @@
 @extends('layouts/auth')
-
+@push('title') <title> Forgot Password | Restaurant Management System</title> @endpush
 @section('content')
     <main id="main-container">
         <!-- Page Content -->
