@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SuperAdmin\SuperAdminController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,19 +15,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('auth.login',[
-        'title' => 'Login'
-    ]);
+    return view('auth.login');
 });
 
 Route::get('register', function () {
-    return view('auth.register',[
-        'title' => 'Register'
-    ]);
+    return view('auth.register');
 });
 
 Route::get('forgot-password', function () {
-    return view('auth.forgot-password',[
-        'title' => 'Forgot Password'
-    ]);
+    return view('auth.forgot-password');
 });
+
+Route::prefix('super-admin')->group(function (){
+    Route::get('/', [SuperAdminController::class, 'index'])->name('sa.dashboard');
+});
+
