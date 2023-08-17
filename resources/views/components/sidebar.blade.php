@@ -30,7 +30,7 @@
             <div class="content-side content-side-full">
                 <ul class="nav-main">
                     <li class="nav-main-item">
-                        <a class="nav-main-link {{url()->current() ? 'active': ''}}" href="{{route('sa.dashboard')}}">
+                        <a class="nav-main-link {{url()->current() == route('sa.dashboard') ? 'active': ''}}" href="{{route('sa.dashboard')}}">
                             <i class="nav-main-link-icon fa fa-house-user"></i>
                             <span class="nav-main-link-name">Dashboard</span>
                         </a>
@@ -98,7 +98,7 @@
 
                     <li class="nav-main-heading">Users</li>
                     <li class="nav-main-item">
-                        <a class="nav-main-link">
+                        <a class="nav-main-link {{url()->current() == route('sa.new-user') ? 'active': ''}}" href="/super-admin/new-user">
                             <i class="nav-main-link-icon fa fa-user-plus"></i>
                             <span class="nav-main-link-name">New User</span>
                         </a>
