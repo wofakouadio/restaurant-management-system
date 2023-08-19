@@ -1,11 +1,17 @@
 <script type="text/javascript">
+
+    //function to reload / refresh a page
+    // const RefreshPage = () =>{
+    //
+    // }
+
     $("#sa-new-user-form #new-user-form-alert").hide()
     $(document).on("submit", "#sa-new-user-form", (e)=>{
-        // $.ajaxSetup({
-        //     headers: {
-        //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        //     }
-        // });
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
         let form_data = $("#sa-new-user-form")[0]
         e.preventDefault()
         $.ajax({
@@ -14,17 +20,31 @@
             cache:false,
             processData:false,
             contentType:false,
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
             data: new FormData(form_data),
             success:(response)=>{
-                let s = JSON.stringify(response)
-                let c = JSON.parse(s)
-                if(c.image){
-                    $("#sa-new-user-form #new-user-form-alert").show().html(c.image)
+                let StringResults = JSON.stringify(response)
+                let DecodedResults = JSON.parse(StringResults)
+                if(DecodedResults.status === 201){
+                    $("#sa-new-user-form #new-user-form-alert").removeClass('alert-success')
+                    $("#sa-new-user-form #new-user-form-alert").removeClass('alert-warning')
+                    $("#sa-new-user-form #new-user-form-alert").show().addClass('alert-danger').html(DecodedResults.msg)
                 }else{
-                    $("#sa-new-user-form #new-user-form-alert").show().html(c.error)
+                    $("#sa-new-user-form #new-user-form-alert").removeClass('alert-danger')
+                    $("#sa-new-user-form #new-user-form-alert").removeClass('alert-warning')
+                    // $("#sa-new-user-form #new-user-form-alert").show().addClass('alert-success').html(DecodedResults.msg)
+
+                    Swal.fire({
+                        title: 'Notification',
+                        html: DecodedResults.msg,
+                        icon: 'success',
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                        confirmButtonText: 'Close',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.reload()
+                        }
+                    })
                 }
                 // console.log('Message : ' + s)
                 // alert(c.image)
@@ -33,6 +53,9 @@
                 let StringResults = JSON.stringify(response)
                 let DecodedResults = JSON.parse(StringResults)
                 let errorsCount = DecodedResults.responseJSON.errors
+                $("#sa-new-user-form #new-user-form-alert").removeClass('alert-success')
+                $("#sa-new-user-form #new-user-form-alert").removeClass('alert-danger')
+                $("#sa-new-user-form #new-user-form-alert").show().addClass('alert-warning').html('Check in the forms for errors')
 
                 if('firstname' in errorsCount){
                     $("#sa-new-user-form #firstname-err").html(errorsCount.firstname[0])
@@ -96,7 +119,7 @@
 
                 // console.log(s)
                 // console.log('errorMessage : ' + d)
-                // console.log(errorsCount)
+                console.log(errorsCount)
                 // console.log(f)
                 // console.log('firstname' in errorsCount)
             }

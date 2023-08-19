@@ -16,4 +16,9 @@ class SuperAdminController extends Controller
         $roles = Role::all();
         return view('super-admin.new-user',compact('roles'));
     }
+
+    public function all_users(){
+        $roles = Role::all();
+        return view('super-admin.all-users',compact('roles'));
+    }
 }

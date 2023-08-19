@@ -31,5 +31,6 @@ Route::prefix('super-admin')->group(function (){
     Route::get('/', [SuperAdminController::class, 'index'])->name('sa.dashboard');
     Route::get('/new-user', [SuperAdminController::class, 'new_user_page'])->name('sa.new-user');
     Route::post('/register-new-user', [UserController::class, 'store'])->name('sa.register-new-user');
+    Route::get('/all-users', [SuperAdminController::class, 'all_users'])->name('sa.all-users');
 });
 

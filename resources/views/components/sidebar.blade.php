@@ -104,7 +104,7 @@
                         </a>
                     </li>
                     <li class="nav-main-item">
-                        <a class="nav-main-link">
+                        <a class="nav-main-link {{url()->current() == route('sa.all-users') ? 'active': ''}}" href="/super-admin/all-users">
                             <i class="nav-main-link-icon fa fa-users-line"></i>
                             <span class="nav-main-link-name">List</span>
                         </a>

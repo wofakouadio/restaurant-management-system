@@ -19,11 +19,23 @@
 <script src="{{asset('assets/js/plugins/dropzone/min/dropzone.min.js')}}"></script>
 <script src="{{asset('assets/js/plugins/flatpickr/flatpickr.min.js')}}"></script>
 <script src="{{asset('assets/js/plugins/sweetalert2/sweetalert2.min.js')}}"></script>
+<script src="{{asset('assets/js/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('assets/js/plugins/datatables-bs5/js/dataTables.bootstrap5.min.js')}}"></script>
+<script src="{{asset('assets/js/plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
+<script src="{{asset('assets/js/plugins/datatables-responsive-bs5/js/responsive.bootstrap5.min.js')}}"></script>
+<script src="{{asset('assets/js/plugins/datatables-buttons/dataTables.buttons.min.js')}}"></script>
+<script src="{{asset('assets/js/plugins/datatables-buttons-bs5/js/buttons.bootstrap5.min.js')}}"></script>
+<script src="{{asset('assets/js/plugins/datatables-buttons-jszip/jszip.min.js')}}"></script>
+<script src="{{asset('assets/js/plugins/datatables-buttons-pdfmake/pdfmake.min.js')}}"></script>
+<script src="{{asset('assets/js/plugins/datatables-buttons-pdfmake/vfs_fonts.js')}}"></script>
+<script src="{{asset('assets/js/plugins/datatables-buttons/buttons.print.min.js')}}"></script>
+<script src="{{asset('assets/js/plugins/datatables-buttons/buttons.html5.min.js')}}"></script>
 
 
 <!-- Page JS Code -->
 <script src="{{asset('assets/js/pages/be_pages_ecom_dashboard.min.js')}}"></script>
 <script src="{{asset('assets/js/pages/be_comp_dialogs.min.js')}}"></script>
+<script src="{{asset('assets/js/pages/be_tables_datatables.min.js')}}"></script>
 
 {{-- custom js --}}
 <!-- Page JS Helpers (Flatpickr + BS Datepicker + BS Maxlength + Select2 + Ion Range Slider + Masked Inputs + Password Strength Meter plugins) -->
