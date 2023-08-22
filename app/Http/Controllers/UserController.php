@@ -59,4 +59,68 @@ class UserController extends Controller
             'msg' => 'Error : Something went wrong'
         ]);
     }
+
+    public function edit(Request $request){
+        try {
+            $getUser = User::where('userid', $request['user_id'])->get();
+            return response()->json([
+                'status' => 200,
+                'msg' => 'User found ss',
+                'data' => $getUser
+            ]);
+        } catch (\Exception $e){
+            return response()->json([
+                'status' => 201,
+                'msg' => 'User not found. Error :' . $e->getMessage(),
+                'data' => []
+            ]);
+        }
+    }
+
+    public function update(Request $request){
+        $UpdateUser = $request->validate([
+            'firstname' => ['required','regex:/^([a-zA-Z]+)(\s[a-zA-Z]+)*$/'],
+            'lastname' => ['required','regex:/^([a-zA-Z]+)(\s[a-zA-Z]+)*$/'],
+            'dob' => 'required|date',
+            'placeofbirth' => 'required',
+            'gender' => 'required',
+            'address' => 'required',
+            'contact' => ['required','regex:/^([0-9]+)*$/'],
+            'email' => 'required|email',
+            'username' => 'required',
+            'role' => 'required'
+        ]);
+
+        if ($request->hasFile('profile-picture')) {
+            $UpdateUser['profile-picture'] =  $request->file('profile-picture')->store('users', 'public');
+        }else{
+            $UpdateUser['profile-picture'] = $request['user-profile-picture'];
+        }
+        $Sql = User::update([
+            'sur_name' => mb_strtoupper($UpdateUser['firstname']),
+            'middle_name' => mb_strtoupper($request['middlename']),
+            'last_name' => mb_strtoupper($UpdateUser['lastname']),
+            'dob' => ($UpdateUser['dob']),
+            'gender' => $UpdateUser['gender'],
+            'place_of_birth' => $UpdateUser['placeofbirth'],
+            'main_address' => $UpdateUser['address'],
+            'secondary_address' => $request['secondary-address'],
+            'primary_contact' => $UpdateUser['contact'],
+            'secondary_contact' => $request['secondary-contact'],
+            'email' => $UpdateUser['email'],
+            'username' => $UpdateUser['username'],
+            'profile_picture' => $UpdateUser['profile-picture'],
+            'role_type' => $UpdateUser['role']
+        ]);
+        if($Sql){
+            return response()->json([
+                'status' => 200,
+                'msg' => 'User updated successfully'
+            ]);
+        }
+        return response()->json([
+            'status' => 201,
+            'msg' => 'Error : Something went wrong'
+        ]);
+    }
 }

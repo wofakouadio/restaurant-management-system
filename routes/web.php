@@ -32,5 +32,8 @@ Route::prefix('super-admin')->group(function (){
     Route::get('/new-user', [SuperAdminController::class, 'new_user_page'])->name('sa.new-user');
     Route::post('/register-new-user', [UserController::class, 'store'])->name('sa.register-new-user');
     Route::get('/all-users', [SuperAdminController::class, 'all_users'])->name('sa.all-users');
+    Route::get('/get-all-roles', [SuperAdminController::class, 'get_all_roles'])->name('sa.get-all-roles');
+    Route::post('/edit-edit', [UserController::class, 'edit'])->name('sa.edit-user');
+    Route::put('/update-user', [UserController::class, 'update'])->name('sa.update-user');
 });
 
