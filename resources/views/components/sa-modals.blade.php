@@ -1,4 +1,4 @@
-<!-- Extra Large Modal -->
+<!-- Edit User Info Modal -->
 <div class="modal" id="edit-user-modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-extra-large" aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
@@ -148,4 +148,45 @@
         </div>
     </div>
 </div>
-<!-- END Extra Large Modal -->
+<!-- Edit User Info Modal -->
+
+<!-- Delete User Info Modal -->
+<div class="modal" id="delete-user-modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-extra-large" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="block block-rounded shadow-none mb-0">
+                <form action="" method="POST" id="sa-delete-user-form">
+                    @csrf
+                    @method('DELETE')
+                    <div class="block-header block-header-default">
+                        <h3 class="block-title">Delete User Profile</h3>
+                        <div class="block-options">
+                            <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="block-content fs-sm">
+                        <div class="alert alert-danger" id="delete-user-form-alert"></div>
+                        <div class="block block-rounded shadow-none mb-0">
+                            <div class="col">
+                                <h2 class="h4 fw-normal" id="delete-notice"></h2>
+                                <input type="hidden" name="user-id"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="block-content block-content-full block-content-sm text-end border-top">
+
+                        <button type="button" class="btn btn-alt-secondary" data-bs-dismiss="modal">
+                            Close
+                        </button>
+                        <button type="submit" class="btn btn-alt-danger" name="btn-delete-user" id="btn-delete-user">
+                            <i class="fa fa-check opacity-50 me-1"></i> Delete User
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Delete User Info Modal -->

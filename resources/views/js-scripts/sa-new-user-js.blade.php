@@ -1,10 +1,5 @@
 <script type="text/javascript">
 
-    //function to reload / refresh a page
-    // const RefreshPage = () =>{
-    //
-    // }
-
     // constant to get all roles
     const AllUsersRoles = () =>{
         $.ajaxSetup({
@@ -145,7 +140,6 @@
         })
     })
 
-
     // show edit user modal form
     $("#sa-update-user-form #update-user-form-alert").hide()
     $(document).on("show.bs.modal", "#edit-user-modal-form", (event)=>{
@@ -158,8 +152,8 @@
             }
         });
         $.ajax({
-            url:'{{route('sa.edit-user')}}',
-            method:'POST',
+            url:'{{route('sa.get-user')}}',
+            method:'GET',
             cache:false,
             data: {'user_id' : user_id},
             success:(response)=>{
@@ -217,7 +211,7 @@
                     icon: 'info',
                     allowOutsideClick: false,
                     allowEscapeKey: false,
-                    showCloseButton: false
+                    showConfirmButton: false
                 })
             },
             success:(response)=>{
@@ -324,6 +318,94 @@
             }
         })
     })
+
+    // show delete user modal form
+    $("#sa-delete-user-form #delete-user-form-alert").hide()
+    $(document).on("show.bs.modal", "#delete-user-modal-form", (event)=>{
+        let str = $(event.relatedTarget)
+        let modal = $("#delete-user-modal-form")
+        let user_id = str.data('user_id')
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url:'{{route('sa.get-user')}}',
+            method:'GET',
+            cache:false,
+            data: {'user_id' : user_id},
+            success:(response)=>{
+                let StringResults = JSON.stringify(response)
+                let DecodedResults = JSON.parse(StringResults)
+                // console.log(DecodedResults)
+                if(DecodedResults.status === 201){
+                    $("#sa-delete-user-form #delete-user-form-alert").show().addClass("alert-warning").html(DecodedResults.msg)
+                    $("#sa-delete-user-form #delete-user-form-alert").removeClass("alert-danger").html('')
+                }else{
+                    $("#sa-delete-user-form #delete-user-form-alert").removeClass("alert-warning").html('')
+                    $("#sa-delete-user-form #delete-user-form-alert").removeClass("alert-danger").html('')
+                    modal.find("#delete-notice").html('Are you sure of deleting '+DecodedResults.data[0].sur_name+' '+DecodedResults.data[0].last_name+' data ?')
+                    modal.find("input[name=user-id]").val(DecodedResults.data[0].userid)
+                }
+            }
+        })
+    })
+
+    // delete user info from delete modal form
+    $(document).on("submit", "#sa-delete-user-form", (e)=>{
+        e.preventDefault();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url:'{{route('sa.delete-user')}}',
+            method:'POST',
+            cache:false,
+            dataType: 'json',
+            data: $("#sa-delete-user-form").serialize(),
+            beforeSend:()=>{
+                Swal.fire({
+                    title: 'Notification',
+                    html: "Sit tight as we check all the records",
+                    icon: 'info',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    showConfirmButton: false
+                })
+            },
+            success:(response)=>{
+                let StringResults = JSON.stringify(response)
+                let DecodedResults = JSON.parse(StringResults)
+                if(DecodedResults.status === 201){
+                    $("#sa-delete-user-form #delete-user-form-alert").removeClass('alert-success')
+                    $("#sa-delete-user-form #delete-user-form-alert").removeClass('alert-warning')
+                    $("#sa-delete-user-form #delete-user-form-alert").show().addClass('alert-danger').html(DecodedResults.msg)
+                }else{
+                    $("#sa-delete-user-form #delete-user-form-alert").removeClass('alert-danger')
+                    $("#sa-delete-user-form #delete-user-form-alert").removeClass('alert-warning')
+
+                    Swal.fire({
+                        title: 'Notification',
+                        html: DecodedResults.msg,
+                        icon: 'success',
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                        confirmButtonText: 'Close',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.reload()
+                        }
+                    })
+                }
+                // console.log('Message : ' + s)
+                // alert(c.image)
+            }
+        })
+    })
+
     //
     // $(document).on("click", "#btn-new-user", (e)=>{
     //     e.preventDefault()

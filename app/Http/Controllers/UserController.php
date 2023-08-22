@@ -123,4 +123,18 @@ class UserController extends Controller
             'msg' => 'Error : Something went wrong'
         ]);
     }
+
+    public function delete(Request $request){
+        $Sql = User::where('userid', $request['user-id'])->delete();
+        if($Sql){
+            return response()->json([
+                'status' => 200,
+                'msg' => 'User deleted successfully'
+            ]);
+        }
+        return response()->json([
+            'status' => 201,
+            'msg' => 'Error : Something went wrong'
+        ]);
+    }
 }

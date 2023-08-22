@@ -46,7 +46,7 @@
                                     <button type="button" class="btn btn-sm btn-secondary" title="Edit" data-bs-toggle="modal" data-bs-target="#edit-user-modal-form" data-user_id="{{$user->userid}}">
                                         <i class="fa fa-pencil-alt"></i>
                                     </button>
-                                    <button type="button" class="btn btn-sm btn-secondary" data-bs-toggle="tooltip" title="Delete">
+                                    <button type="button" class="btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#delete-user-modal-form" data-user_id="{{$user->userid}}">
                                         <i class="fa fa-times"></i>
                                     </button>
                                 </div>
