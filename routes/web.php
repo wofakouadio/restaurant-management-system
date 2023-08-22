@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\SuperAdmin\SuperAdminController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,19 +17,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('auth.login');
+Route::middleware('guest')->group(function(){
+    Route::get('/', [AuthController::class, 'index']);
+    Route::get('register', [AuthController::class, 'show_registration']);
+    Route::get('forgot-password', [AuthController::class, 'show_forgot_password']);
 });
 
-Route::get('register', function () {
-    return view('auth.register');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::prefix('auth')->group( function () {
+    Route::post('/user-login', [AuthController::class, 'login'])->name('auth.user-login');
 });
 
-Route::get('forgot-password', function () {
-    return view('auth.forgot-password');
-});
-
-Route::prefix('super-admin')->group(function (){
+Route::middleware('super-admin')->prefix('super-admin')->group(function (){
     Route::get('/', [SuperAdminController::class, 'index'])->name('sa.dashboard');
     Route::get('/new-user', [SuperAdminController::class, 'new_user_page'])->name('sa.new-user');
     Route::post('/register-new-user', [UserController::class, 'store'])->name('sa.register-new-user');

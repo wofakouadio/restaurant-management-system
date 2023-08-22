@@ -82,10 +82,12 @@
                             <span>Toggle Mode</span>
                             <i class="fa fa-burn"></i>
                         </a>
-                        <a class="dropdown-item d-flex align-items-center justify-content-between space-x-1" href="/logout">
-                            <span>Sign Out</span>
-                            <i class="fa fa-fw fa-sign-out-alt opacity-25"></i>
-                        </a>
+                        <form method="POST" action="{{route('logout')}}" class="dropdown-item d-flex align-items-center justify-content-between space-x-1">
+                            @csrf
+                            <button type="submit" class="btn btn-alt-secondary">
+                                <i class="fa fa-fw fa-sign-out-alt opacity-25"></i>Sign Out
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>

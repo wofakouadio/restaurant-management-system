@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 
@@ -46,7 +47,7 @@ class UserController extends Controller
             'username' => $NewUser['username'],
             'profile_picture' => $NewUser['profile-picture'],
             'role_type' => $NewUser['role'],
-            'password' => bcrypt('password')
+            'password' => Hash::make('password')
         ]);
         if($Sql){
             return response()->json([

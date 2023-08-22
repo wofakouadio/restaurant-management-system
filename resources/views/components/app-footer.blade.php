@@ -6,7 +6,8 @@
 -->
 <script src="{{asset('assets/js/lib/jquery.min.js')}}">
 
-</script><script src="{{asset('assets/js/codebase.app.min.js')}}"></script>
+</script>
+<script src="{{asset('assets/js/codebase.app.min.js')}}"></script>
 
 <!-- Page JS Plugins -->
 <script src="{{asset('assets/js/plugins/chart.js/chart.umd.js')}}"></script>
@@ -39,7 +40,7 @@
 
 {{-- custom js --}}
 <!-- Page JS Helpers (Flatpickr + BS Datepicker + BS Maxlength + Select2 + Ion Range Slider + Masked Inputs + Password Strength Meter plugins) -->
-    <script>Codebase.helpersOnLoad(['js-flatpickr', 'jq-datepicker', 'jq-maxlength', 'jq-select2', 'jq-rangeslider', 'jq-masked-inputs', 'jq-pw-strength']);</script>
-    @include('js-scripts/sa-new-user-js')
+<script>Codebase.helpersOnLoad(['js-flatpickr', 'jq-datepicker', 'jq-maxlength', 'jq-select2', 'jq-rangeslider', 'jq-masked-inputs', 'jq-pw-strength']);</script>
+@include('js-scripts.sa-users-js')
 </body>
 </html>

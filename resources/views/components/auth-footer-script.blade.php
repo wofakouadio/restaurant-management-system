@@ -16,6 +16,6 @@
 <script src="{{asset('assets/js/pages/op_auth_signin.min.js')}}"></script>
 <script src="{{asset('assets/js/pages/op_auth_signup.min.js')}}"></script>
 <script src="{{asset('assets/js/pages/op_auth_reminder.min.js')}}"></script>
-
+@include('js-scripts/login-script-js')
 </body>
 </html>

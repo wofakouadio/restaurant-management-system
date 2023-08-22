@@ -29,15 +29,18 @@
                         <!-- Sign In Form -->
                         <!-- jQuery Validation functionality is initialized with .js-validation-signin class in js/pages/op_auth_signin.min.js which was auto compiled from _js/pages/op_auth_signin.js -->
                         <!-- For more examples you can check out https://github.com/jzaefferer/jquery-validation -->
-                        <form class="js-validation-signin px-4" action="" method="POST">
+                        <form class="px-4" method="POST" id="login-form">
                             @csrf
+                            <div class="alert" id="login-form-alert"></div>
                             <div class="form-floating mb-4">
-                                <input type="text" class="form-control" id="login-username" name="login-username" placeholder="Enter your username">
+                                <input type="text" class="form-control" id="login-username" name="username" placeholder="Enter your username">
                                 <label class="form-label" for="login-username">Username</label>
+                                <span class="text-danger" id="username-err"></span>
                             </div>
                             <div class="form-floating mb-4">
-                                <input type="password" class="form-control" id="login-password" name="login-password" placeholder="Enter your password">
+                                <input type="password" class="form-control" id="login-password" name="password" placeholder="Enter your password">
                                 <label class="form-label" for="login-password">Password</label>
+                                <span class="text-danger" id="password-err"></span>
                             </div>
                             <div class="mb-4">
                                 <div class="form-check">
