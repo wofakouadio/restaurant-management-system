@@ -210,6 +210,16 @@
             processData:false,
             contentType:false,
             data: new FormData(form_data),
+            beforeSend:()=>{
+                Swal.fire({
+                    title: 'Notification',
+                    html: "Sit tight as we update the record",
+                    icon: 'info',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    showCloseButton: false
+                })
+            },
             success:(response)=>{
                 let StringResults = JSON.stringify(response)
                 let DecodedResults = JSON.parse(StringResults)

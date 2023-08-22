@@ -96,7 +96,7 @@ class UserController extends Controller
         }else{
             $UpdateUser['profile-picture'] = $request['user-profile-picture'];
         }
-        $Sql = User::update([
+        $Sql = User::where('userid', $request['user-id'])->update([
             'sur_name' => mb_strtoupper($UpdateUser['firstname']),
             'middle_name' => mb_strtoupper($request['middlename']),
             'last_name' => mb_strtoupper($UpdateUser['lastname']),
