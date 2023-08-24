@@ -235,7 +235,7 @@
 
 <!-- Edit Category Modal -->
 <div class="modal" id="edit-category-modal" tabindex="-1" role="dialog" aria-labelledby="modal-large" aria-hidden="true">
-    <div class="modal-dialog modal-l" role="document">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="block block-rounded shadow-none mb-0">
                 <form method="POST" enctype="multipart/form-data" id="sa-update-category-form">
@@ -257,10 +257,11 @@
                             <span class="text-danger" id="category-name-err"></span>
                             <input type="hidden" name="cat_id">
                         </div>
-                        <div class="img cat-profile-picture"></div>
+                        <div class="img cat-profile-picture rounded text-center"></div>
                         <div class="form-group mb-4">
                             <label class="form-label" for="example-file-input">Upload Profile Picture</label>
                             <input class="form-control form-control-lg" type="file" id="example-file-input" name="profile-picture">
+                            <input type="hidden" name="fetched-image">
                         </div>
                     </div>
                     <div class="block-content block-content-full block-content-sm text-end border-top">
@@ -277,3 +278,44 @@
     </div>
 </div>
 <!-- Edit Category Modal -->
+
+<!-- Delete User Info Modal -->
+<div class="modal" id="delete-category-modal" tabindex="-1" role="dialog" aria-labelledby="modal-extra-large" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="block block-rounded shadow-none mb-0">
+                <form action="" method="POST" id="sa-delete-category-form">
+                    @csrf
+                    @method('DELETE')
+                    <div class="block-header block-header-default">
+                        <h3 class="block-title">Delete Category</h3>
+                        <div class="block-options">
+                            <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="block-content fs-sm">
+                        <div class="alert alert-danger category-alert"></div>
+                        <div class="block block-rounded shadow-none mb-0">
+                            <div class="col">
+                                <h2 class="h4 fw-normal" id="delete-notice"></h2>
+                                <input type="hidden" name="cat-id"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="block-content block-content-full block-content-sm text-end border-top">
+
+                        <button type="button" class="btn btn-alt-secondary" data-bs-dismiss="modal">
+                            Close
+                        </button>
+                        <button type="submit" class="btn btn-alt-danger" name="btn-delete-user" id="btn-delete-user">
+                            <i class="fa fa-check opacity-50 me-1"></i> Delete
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Delete User Info Modal -->

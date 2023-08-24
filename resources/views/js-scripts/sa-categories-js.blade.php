@@ -66,7 +66,7 @@
         })
     })
 
-    //Show Categoy Info in Edit Modal
+    //Show Category Info in Edit Modal
     $(document).on("show.bs.modal", "#edit-category-modal", (event)=>{
         let str = $(event.relatedTarget)
         let cat_id = str.data('cat_id')
@@ -92,10 +92,46 @@
                     modal.find(".category-alert").removeClass('alert-danger')
                     modal.find(".category-alert").removeClass('alert-warning')
                     modal.find("input[name=name]").val(DecodedResults.data[0].name)
+                    modal.find("input[name=cat_id]").val(DecodedResults.data[0].cat_id)
+                    modal.find(".cat-profile-picture").html('<img src="../storage/'+DecodedResults.data[0].image+'" class="img" width="200px"/>')
+                    modal.find("input[name=fetched-image]").val(DecodedResults.data[0].image)
                 }
-                console.log(response)
             }
         })
     })
+
+    // Show Category Info in Delete Modal
+    $(document).on("show.bs.modal", "#delete-category-modal", (event)=>{
+        let str = $(event.relatedTarget)
+        let cat_id = str.data('cat_id')
+        let modal = $("#delete-category-modal")
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url:'{{route('sa.get-category')}}',
+            method:'GET',
+            cache:false,
+            data: {cat_id:cat_id},
+            success:(response)=>{
+                let StringResults = JSON.stringify(response)
+                let DecodedResults = JSON.parse(StringResults)
+                if(DecodedResults.status === 201){
+                    modal.find(".category-alert").removeClass('alert-success')
+                    modal.find(".category-alert").removeClass('alert-warning')
+                    modal.modal('hide')
+                }else{
+                    modal.find(".category-alert").removeClass('alert-danger')
+                    modal.find(".category-alert").removeClass('alert-warning')
+                    modal.find("#delete-notice").html("Are you sure of deleting " +DecodedResults.data[0].name + " category ?")
+                    modal.find("input[name=cat-id]").val(DecodedResults.data[0].cat_id)
+                }
+            }
+        })
+    })
+
+    //
 
 </script>
