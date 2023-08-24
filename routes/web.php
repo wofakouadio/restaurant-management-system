@@ -31,8 +31,11 @@ Route::prefix('auth')->group( function () {
 });
 
 Route::middleware('super-admin')->prefix('super-admin')->group(function (){
-    /** Users **/
+
+    /** Dashboard **/
     Route::get('/', [SuperAdminController::class, 'index'])->name('sa.dashboard');
+
+    /** Users **/
     Route::get('/new-user', [SuperAdminController::class, 'new_user_page'])->name('sa.new-user');
     Route::post('/register-new-user', [UserController::class, 'store'])->name('sa.register-new-user');
     Route::get('/all-users', [SuperAdminController::class, 'all_users'])->name('sa.all-users');
@@ -45,5 +48,7 @@ Route::middleware('super-admin')->prefix('super-admin')->group(function (){
     Route::get('/categories', [CategoriesController::class, 'index'])->name('sa.categories');
     Route::post('/new-category', [CategoriesController::class, 'store'])->name('sa.new-category');
     Route::get('/get-category', [CategoriesController::class, 'edit'])->name('sa.get-category');
+    Route::put('/update-category', [CategoriesController::class, 'update'])->name('sa.update-category');
+    Route::delete('/delete-category', [CategoriesController::class, 'delete'])->name('sa.delete-category');
 });
 

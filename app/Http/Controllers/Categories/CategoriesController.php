@@ -64,4 +64,47 @@ class CategoriesController extends Controller
             ]);
         }
     }
+
+    public function update(Request $request){
+        $request->validate([
+            'name' => 'required'
+        ]);
+
+        if ($request->hasFile('profile-picture')) {
+            $profile_picture =  $request->file('profile-picture')->store('items/categories', 'public');
+        }else{
+            $profile_picture = $request['fetched-image'];
+        }
+
+        $Sql = Category::where('cat_id', $request['cat_id'])->update([
+            'name' => strtoupper($request['name']),
+            'image' => $profile_picture
+        ]);
+
+        if($Sql){
+            return response()->json([
+                'status' => 200,
+                'msg' => 'Category updated successfully'
+            ]);
+        }
+        return response()->json([
+            'status' => 201,
+            'msg' => 'Error: something went wrong'
+        ]);
+    }
+
+    public function delete(Request $request){
+        $Sql = Category::where('cat_id', $request['cat-id'])->delete();
+        if($Sql){
+            return response()->json([
+                'status' => 200,
+                'msg' => 'Category deleted successfully'
+            ]);
+        }
+        return response()->json([
+            'status' => 201,
+            'msg' => 'Error : Something went wrong'
+        ]);
+    }
+
 }

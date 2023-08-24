@@ -40,11 +40,12 @@ class SyncDatabase extends Command
         try {
             // Get the data from the local database
             $data = $localConnection->select('SELECT * FROM categories');
-
+            $dataRemote = $remoteConnection->select('SELECT * FROM categories');
 
             // Insert the data into the remote database
             foreach ($data as $row) {
-                if($remoteConnection->select('SELECT * FROM categories WHERE `cat_id` = ?', [$row->cat_id])){
+                $checkRemoteRecord = $remoteConnection->select('SELECT * FROM categories WHERE `cat_id` = ?', [$row->cat_id]);
+                if($checkRemoteRecord){
                     $remoteConnection->update('UPDATE categories SET `name` = ?, `image` = ?, `created_at` = ?, `updated_at` = ? WHERE `cat_id` = ?', [
                         $row->name,
                         $row->image,
@@ -53,13 +54,23 @@ class SyncDatabase extends Command
                         $row->cat_id
                     ]);
                 }else{
-                    $remoteConnection->insert('INSERT INTO categories (cat_id, name, image, created_at, updated_at) VALUES (?,?,?,?,?)', [
-                        $row->cat_id,
-                        $row->name,
-                        $row->image,
-                        $row->created_at,
-                        $row->updated_at
-                    ]);
+//                    foreach ($dataRemote as $rowRemote){
+//                        $checkLocalRecord = $localConnection->select('SELECT * FROM categories WHERE `cat_id` = ?', [$rowRemote->cat_id]);
+//                        if($rowRemote->cat_id !== $row->cat_id){
+//
+//                        }
+//                        if(!$checkLocalRecord){
+                            $remoteConnection->insert('INSERT INTO categories (cat_id, name, image, created_at, updated_at) VALUES (?,?,?,?,?)', [
+                                $row->cat_id,
+                                $row->name,
+                                $row->image,
+                                $row->created_at,
+                                $row->updated_at
+                            ]);
+//                        }else{
+//                            $remoteConnection->delete('DELETE FROM categories WHERE `cat_id` = ?)', [$row->cat_id]);
+//                        }
+
                 }
             }
 

@@ -14,7 +14,7 @@
                 <table class="table table-bordered table-striped table-vcenter js-dataTable-full">
                     <thead>
                     <tr>
-
+                        <th class="text-center" style="width: 100px;"><i class="si si-user"></i></th>
                         <th>Name</th>
                         <th class="text-center" style="width: 100px;">Actions</th>
                     </tr>
@@ -22,7 +22,9 @@
                     <tbody>
                     @foreach($categories as $category)
                         <tr>
-
+                            <td class="text-center">
+                                <img class="img-avatar img-avatar48" src="{{$category->image ? asset('storage/'.$category->image) : asset('images/no-image.png')}}" alt="">
+                            </td>
                             <td class="fw-semibold">{{$category->name}}</td>
                             <td class="text-center">
                                 <div class="btn-group">

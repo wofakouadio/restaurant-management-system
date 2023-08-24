@@ -207,7 +207,7 @@
                         </div>
                     </div>
                     <div class="block-content block-content-full fs-sm">
-                        <div class="alert alert-danger" id="category-alert"></div>
+                        <div class="alert alert-danger category-alert"></div>
                         <div class="form-group mb-4">
                             <label class="form-label" for="mega-firstname">Name</label>
                             <input type="text" class="form-control form-control-lg" id="mega-firstname" name="name" placeholder="Enter category..">
