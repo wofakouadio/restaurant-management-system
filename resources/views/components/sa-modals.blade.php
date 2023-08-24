@@ -190,3 +190,90 @@
     </div>
 </div>
 <!-- Delete User Info Modal -->
+
+<!-- New Category Modal -->
+<div class="modal" id="add-category-modal" tabindex="-1" role="dialog" aria-labelledby="modal-large" aria-hidden="true">
+    <div class="modal-dialog modal-l" role="document">
+        <div class="modal-content">
+            <div class="block block-rounded shadow-none mb-0">
+                <form action="" method="POST" enctype="multipart/form-data" id="sa-new-category-form">
+                    @csrf
+                    <div class="block-header block-header-default">
+                        <h3 class="block-title">New Category</h3>
+                        <div class="block-options">
+                            <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="block-content block-content-full fs-sm">
+                        <div class="alert alert-danger" id="category-alert"></div>
+                        <div class="form-group mb-4">
+                            <label class="form-label" for="mega-firstname">Name</label>
+                            <input type="text" class="form-control form-control-lg" id="mega-firstname" name="name" placeholder="Enter category..">
+                            <span class="text-danger" id="category-name-err"></span>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label class="form-label" for="example-file-input">Upload Profile Picture</label>
+                            <input class="form-control form-control-lg" type="file" id="example-file-input" name="profile-picture">
+                        </div>
+                    </div>
+                    <div class="block-content block-content-full block-content-sm text-end border-top">
+                        <button type="button" class="btn btn-alt-secondary" data-bs-dismiss="modal">
+                            Close
+                        </button>
+                        <button type="submit" class="btn btn-alt-primary" name="btn-new-category" id="btn-new-category">
+                            <i class="fa fa-check opacity-50 me-1"></i> Add
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- New Category Modal -->
+
+<!-- Edit Category Modal -->
+<div class="modal" id="edit-category-modal" tabindex="-1" role="dialog" aria-labelledby="modal-large" aria-hidden="true">
+    <div class="modal-dialog modal-l" role="document">
+        <div class="modal-content">
+            <div class="block block-rounded shadow-none mb-0">
+                <form method="POST" enctype="multipart/form-data" id="sa-update-category-form">
+                    @csrf
+                    @method('PUT')
+                    <div class="block-header block-header-default">
+                        <h3 class="block-title">Category</h3>
+                        <div class="block-options">
+                            <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="block-content block-content-full fs-sm">
+                        <div class="alert alert-danger category-alert"></div>
+                        <div class="form-group mb-4">
+                            <label class="form-label" for="mega-firstname">Name</label>
+                            <input type="text" class="form-control form-control-lg" id="mega-firstname" name="name" placeholder="Enter category..">
+                            <span class="text-danger" id="category-name-err"></span>
+                            <input type="hidden" name="cat_id">
+                        </div>
+                        <div class="img cat-profile-picture"></div>
+                        <div class="form-group mb-4">
+                            <label class="form-label" for="example-file-input">Upload Profile Picture</label>
+                            <input class="form-control form-control-lg" type="file" id="example-file-input" name="profile-picture">
+                        </div>
+                    </div>
+                    <div class="block-content block-content-full block-content-sm text-end border-top">
+                        <button type="button" class="btn btn-alt-secondary" data-bs-dismiss="modal">
+                            Close
+                        </button>
+                        <button type="submit" class="btn btn-alt-primary" name="btn-new-category" id="btn-new-category">
+                            <i class="fa fa-check opacity-50 me-1"></i> Update
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Edit Category Modal -->

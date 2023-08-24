@@ -38,7 +38,7 @@
 
                     <li class="nav-main-heading">Kits</li>
                     <li class="nav-main-item">
-                        <a class="nav-main-link " href="#">
+                        <a class="nav-main-link {{url()->current() == route('sa.categories') ? 'active': ''}}" href="{{route('sa.categories')}}">
                             <i class="nav-main-link-icon fa fa-grip-vertical"></i>
                             <span class="nav-main-link-name">Categories</span>
                         </a>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Categories\CategoriesController;
 use App\Http\Controllers\SuperAdmin\SuperAdminController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -17,12 +18,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('guest')->group(function(){
-    Route::get('/', [AuthController::class, 'index']);
-    Route::get('register', [AuthController::class, 'show_registration']);
-    Route::get('forgot-password', [AuthController::class, 'show_forgot_password']);
-});
-
+//Route::middleware('guest')->group(function(){
+//
+//});
+Route::get('/', [AuthController::class, 'index']);
+Route::get('register', [AuthController::class, 'show_registration']);
+Route::get('forgot-password', [AuthController::class, 'show_forgot_password']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::prefix('auth')->group( function () {
@@ -30,6 +31,7 @@ Route::prefix('auth')->group( function () {
 });
 
 Route::middleware('super-admin')->prefix('super-admin')->group(function (){
+    /** Users **/
     Route::get('/', [SuperAdminController::class, 'index'])->name('sa.dashboard');
     Route::get('/new-user', [SuperAdminController::class, 'new_user_page'])->name('sa.new-user');
     Route::post('/register-new-user', [UserController::class, 'store'])->name('sa.register-new-user');
@@ -38,5 +40,10 @@ Route::middleware('super-admin')->prefix('super-admin')->group(function (){
     Route::get('/get-user', [UserController::class, 'edit'])->name('sa.get-user');
     Route::put('/update-user', [UserController::class, 'update'])->name('sa.update-user');
     Route::delete('/delete-user', [UserController::class, 'delete'])->name('sa.delete-user');
+
+    /** Categories **/
+    Route::get('/categories', [CategoriesController::class, 'index'])->name('sa.categories');
+    Route::post('/new-category', [CategoriesController::class, 'store'])->name('sa.new-category');
+    Route::get('/get-category', [CategoriesController::class, 'edit'])->name('sa.get-category');
 });
 
