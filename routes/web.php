@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Categories\CategoriesController;
+use App\Http\Controllers\categories\SubCategoriesController;
 use App\Http\Controllers\SuperAdmin\SuperAdminController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -50,5 +51,12 @@ Route::middleware('super-admin')->prefix('super-admin')->group(function (){
     Route::get('/get-category', [CategoriesController::class, 'edit'])->name('sa.get-category');
     Route::put('/update-category', [CategoriesController::class, 'update'])->name('sa.update-category');
     Route::delete('/delete-category', [CategoriesController::class, 'delete'])->name('sa.delete-category');
+
+    /** Sub Categories **/
+    Route::get('/sub-categories', [SubCategoriesController::class, 'index'])->name('sa.sub-categories');
+//    Route::post('/new-category', [CategoriesController::class, 'store'])->name('sa.new-category');
+//    Route::get('/get-category', [CategoriesController::class, 'edit'])->name('sa.get-category');
+//    Route::put('/update-category', [CategoriesController::class, 'update'])->name('sa.update-category');
+//    Route::delete('/delete-category', [CategoriesController::class, 'delete'])->name('sa.delete-category');
 });
 

@@ -44,7 +44,7 @@
                         </a>
                     </li>
                     <li class="nav-main-item">
-                        <a class="nav-main-link" href="#">
+                        <a class="nav-main-link{{url()->current() == route('sa.sub-categories') ? 'active': ''}}" href="{{route('sa.sub-categories')}}">
                             <i class="nav-main-link-icon fa fa-pencil-ruler"></i>
                             <span class="nav-main-link-name">Sub-Categories</span>
                         </a>
