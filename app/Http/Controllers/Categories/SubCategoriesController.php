@@ -69,4 +69,48 @@ class SubCategoriesController extends Controller
             ]);
         }
     }
+
+    public function update(Request $request){
+        $request->validate([
+            'name' => 'required',
+            'cat-id' => 'required'
+        ]);
+
+        if ($request->hasFile('profile-picture')) {
+            $profile_picture =  $request->file('profile-picture')->store('items/sub-categories', 'public');
+        }else{
+            $profile_picture = $request['fetched-image'];
+        }
+
+        $Sql = SubCategory::where('sub_cat_id', $request['sub_cat_id'])->update([
+            'cat_id' => $request['cat-id'],
+            'name' => strtoupper($request['name']),
+            'image' => $profile_picture
+        ]);
+
+        if($Sql){
+            return response()->json([
+                'status' => 200,
+                'msg' => 'Sub-Category updated successfully'
+            ]);
+        }
+        return response()->json([
+            'status' => 201,
+            'msg' => 'Error: something went wrong'
+        ]);
+    }
+
+    public function delete(Request $request){
+        $Sql = SubCategory::where('sub_cat_id', $request['sub-cat-id'])->delete();
+        if($Sql){
+            return response()->json([
+                'status' => 200,
+                'msg' => 'Sub-Category deleted successfully'
+            ]);
+        }
+        return response()->json([
+            'status' => 201,
+            'msg' => 'Error : Something went wrong'
+        ]);
+    }
 }

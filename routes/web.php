@@ -60,6 +60,8 @@ Route::middleware('super-admin')->prefix('super-admin')->group(function (){
         Route::get('/sub-categories', 'index')->name('sa.sub-categories');
         Route::post('/new-sub-category', 'store')->name('sa.new-sub-category');
         Route::get('/get-sub-category', 'edit')->name('sa.get-sub-category');
+        Route::put('/update-sub-category', 'update')->name('sa.update-sub-category');
+        Route::delete('/delete-sub-category', 'delete')->name('sa.delete-sub-category');
     });
 
 //    Route::post('/new-category', [CategoriesController::class, 'store'])->name('sa.new-category');

@@ -152,9 +152,9 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        let form_data = $("#sa-update-category-form")[0]
+        let form_data = $("#sa-update-sub-category-form")[0]
         $.ajax({
-            url:'{{route('sa.update-category')}}',
+            url:'{{route('sa.update-sub-category')}}',
             method:'POST',
             cache:false,
             processData:false,
@@ -164,12 +164,12 @@
                 let StringResults = JSON.stringify(response)
                 let DecodedResults = JSON.parse(StringResults)
                 if(DecodedResults.status === 201){
-                    $("#sa-update-category-form .category-alert").removeClass('alert-success')
-                    $("#sa-update-category-form .category-alert").removeClass('alert-warning')
-                    $("#sa-update-category-form .category-alert").show().addClass('alert-danger').html(DecodedResults.msg)
+                    $("#sa-update-sub-category-form .sub-category-alert").removeClass('alert-success')
+                    $("#sa-update-sub-category-form .sub-category-alert").removeClass('alert-warning')
+                    $("#sa-update-sub-category-form .sub-category-alert").show().addClass('alert-danger').html(DecodedResults.msg)
                 }else{
-                    $("#sa-update-category-form .category-alert").removeClass('alert-danger')
-                    $("#sa-update-category-form .category-alert").removeClass('alert-warning')
+                    $("#sa-update-sub-category-form .sub-category-alert").removeClass('alert-danger')
+                    $("#sa-update-sub-category-form .sub-category-alert").removeClass('alert-warning')
 
                     Swal.fire({
                         title: 'Notification',
@@ -189,18 +189,24 @@
                 let StringResults = JSON.stringify(response)
                 let DecodedResults = JSON.parse(StringResults)
                 let errorsCount = DecodedResults.responseJSON.errors
-                $("#sa-update-category-form .category-alert").removeClass('alert-success')
-                $("#sa-update-category-form .category-alert").removeClass('alert-danger')
-                $("#sa-update-category-form .category-alert").show().addClass('alert-warning').html('Check in the forms for errors')
+                $("#sa-update-sub-category-form .sub-category-alert").removeClass('alert-success')
+                $("#sa-update-sub-category-form .sub-category-alert").removeClass('alert-danger')
+                $("#sa-update-sub-category-form .sub-category-alert").show().addClass('alert-warning').html('Check in the forms for errors')
 
                 if('name' in errorsCount){
-                    $("#sa-update-category-form #category-name-err").html(errorsCount.name[0])
+                    $("#sa-update-sub-category-form #sub-category-name-err").html(errorsCount.name[0])
                 }else{
-                    $("#sa-update-category-form #category-name-err").html('')
+                    $("#sa-update-sub-category-form #sub-category-name-err").html('')
+                }
+
+                if('cat-id' in errorsCount){
+                    $("#sa-update-sub-category-form #sub-category-name-err").html(errorsCount.name[0])
+                }else{
+                    $("#sa-update-sub-category-form #sub-category-name-err").html('')
                 }
                 // console.log(s)
                 // console.log('errorMessage : ' + d)
-                console.log(errorsCount)
+                // console.log(errorsCount)
                 // console.log(f)
                 // console.log('firstname' in errorsCount)
             }
@@ -216,10 +222,10 @@
             }
         });
         $.ajax({
-            url:'{{route('sa.delete-category')}}',
+            url:'{{route('sa.delete-sub-category')}}',
             method:'POST',
             cache:false,
-            data: $("#sa-delete-category-form").serialize(),
+            data: $("#sa-delete-sub-category-form").serialize(),
             success:(response)=>{
                 let StringResults = JSON.stringify(response)
                 let DecodedResults = JSON.parse(StringResults)
