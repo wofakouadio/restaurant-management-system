@@ -52,4 +52,21 @@ class SubCategoriesController extends Controller
             'msg' => 'Error: something went wrong'
         ]);
     }
+
+    public function edit(Request $request){
+        try {
+            $getSubCategory = SubCategory::where('sub_cat_id', $request['sub_cat_id'])->get();
+            return response()->json([
+                'status' => 200,
+                'msg' => 'Data found',
+                'data' => $getSubCategory
+            ]);
+        } catch (\Exception $e){
+            return response()->json([
+                'status' => 201,
+                'msg' => 'Data not found. Error : ' . $e->getMessage(),
+                'data' => $getSubCategory
+            ]);
+        }
+    }
 }
