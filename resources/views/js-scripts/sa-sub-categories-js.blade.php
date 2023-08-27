@@ -1,19 +1,19 @@
 <script type="text/javascript">
 
     {{--  Alerts  --}}
-    $(".category-alert").hide()
+    $(".sub-category-alert").hide()
 
     // Add new Category
-    $(document).on("submit", "#sa-new-category-form", (e)=>{
+    $(document).on("submit", "#sa-new-sub-category-form", (e)=>{
         e.preventDefault()
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        let form_data = $("#sa-new-category-form")[0]
+        let form_data = $("#sa-new-sub-category-form")[0]
         $.ajax({
-            url:'{{route('sa.new-category')}}',
+            url:'{{route('sa.new-sub-category')}}',
             method:'POST',
             cache:false,
             processData:false,
@@ -23,12 +23,12 @@
                 let StringResults = JSON.stringify(response)
                 let DecodedResults = JSON.parse(StringResults)
                 if(DecodedResults.status === 201){
-                    $("#sa-new-category-form .category-alert").removeClass('alert-success')
-                    $("#sa-new-category-form .category-alert").removeClass('alert-warning')
-                    $("#sa-new-category-form .category-alert").show().addClass('alert-danger').html(DecodedResults.msg)
+                    $("#sa-new-sub-category-form .sub-category-alert").removeClass('alert-success')
+                    $("#sa-new-sub-category-form .sub-category-alert").removeClass('alert-warning')
+                    $("#sa-new-sub-category-form .sub-category-alert").show().addClass('alert-danger').html(DecodedResults.msg)
                 }else{
-                    $("#sa-new-category-form .category-alert").removeClass('alert-danger')
-                    $("#sa-new-category-form .category-alert").removeClass('alert-warning')
+                    $("#sa-new-sub-category-form .sub-category-alert").removeClass('alert-danger')
+                    $("#sa-new-sub-category-form .sub-category-alert").removeClass('alert-warning')
 
                     Swal.fire({
                         title: 'Notification',
@@ -48,18 +48,29 @@
                 let StringResults = JSON.stringify(response)
                 let DecodedResults = JSON.parse(StringResults)
                 let errorsCount = DecodedResults.responseJSON.errors
-                $("#sa-new-category-form .category-alert").removeClass('alert-success')
-                $("#sa-new-category-form .category-alert").removeClass('alert-danger')
-                $("#sa-new-category-form .category-alert").show().addClass('alert-warning').html('Check in the forms for errors')
+                $("#sa-new-sub-category-form .sub-category-alert").removeClass('alert-success')
+                $("#sa-new-sub-category-form .sub-category-alert").removeClass('alert-danger')
+
+                if('message' in errorsCount){
+                    $("#sa-new-sub-category-form .sub-category-alert").show().addClass('alert-warning').html(errorsCount.message)
+                }else{
+                    $("#sa-new-sub-category-form .sub-category-alert").show().addClass('alert-warning').html('Check in the forms for errors')
+                }
 
                 if('name' in errorsCount){
-                    $("#sa-new-category-form #category-name-err").html(errorsCount.name[0])
+                    $("#sa-new-sub-category-form #sub-category-name-err").html(errorsCount.name[0])
                 }else{
-                    $("#sa-new-category-form #category-name-err").html('')
+                    $("#sa-new-sub-category-form #sub-category-name-err").html('')
+                }
+
+                if('cat-id' in errorsCount){
+                    $("#sa-new-sub-category-form #category-name-err").html("The Category is required")
+                }else{
+                    $("#sa-new-sub-category-form #category-name-err").html('')
                 }
                 // console.log(s)
                 // console.log('errorMessage : ' + d)
-                console.log(errorsCount)
+                // console.log(errorsCount)
                 // console.log(f)
                 // console.log('firstname' in errorsCount)
             }
