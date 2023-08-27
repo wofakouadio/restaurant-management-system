@@ -30,6 +30,7 @@
             cache:false,
             success:(Response)=>{
                 $("#add-sub-category-modal").find("select[name=cat-id]").append(Response)
+                $("#edit-sub-category-modal").find("select[name=cat-id]").append(Response)
             }
         })
     }
