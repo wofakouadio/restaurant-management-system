@@ -46,11 +46,14 @@ Route::middleware('super-admin')->prefix('super-admin')->group(function (){
     Route::delete('/delete-user', [UserController::class, 'delete'])->name('sa.delete-user');
 
     /** Categories **/
-    Route::get('/categories', [CategoriesController::class, 'index'])->name('sa.categories');
-    Route::post('/new-category', [CategoriesController::class, 'store'])->name('sa.new-category');
-    Route::get('/get-category', [CategoriesController::class, 'edit'])->name('sa.get-category');
-    Route::put('/update-category', [CategoriesController::class, 'update'])->name('sa.update-category');
-    Route::delete('/delete-category', [CategoriesController::class, 'delete'])->name('sa.delete-category');
+    Route::controller(CategoriesController::class)->group(function (){
+        Route::get('/categories', 'index')->name('sa.categories');
+        Route::post('/new-category', 'store')->name('sa.new-category');
+        Route::get('/get-category', 'edit')->name('sa.get-category');
+        Route::put('/update-category', 'update')->name('sa.update-category');
+        Route::delete('/delete-category', 'delete')->name('sa.delete-category');
+        Route::get('/categories-dropdown', 'categories_dropdown')->name('sa.categories-dropdown');
+    });
 
     /** Sub Categories **/
     Route::get('/sub-categories', [SubCategoriesController::class, 'index'])->name('sa.sub-categories');
