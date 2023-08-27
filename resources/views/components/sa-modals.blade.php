@@ -343,10 +343,10 @@
                         </div>
                     </div>
                     <div class="block-content block-content-full fs-sm">
-                        <div class="alert alert-danger category-alert"></div>
+                        <div class="alert alert-danger sub-category-alert"></div>
                         <div class="form-group mb-4">
                             <label class="form-label" for="mega-firstname">Name</label>
-                            <input type="text" class="form-control form-control-lg" name="name" placeholder="Enter category..">
+                            <input type="text" class="form-control form-control-lg" name="name" placeholder="Enter Sub-Category..">
                             <span class="text-danger" id="sub-category-name-err"></span>
                         </div>
                         <div class="form-group mb-4">
