@@ -21,24 +21,25 @@
                     </tr>
                     </thead>
                     <tbody>
-{{--                    @foreach($categories as $category)--}}
-{{--                        <tr>--}}
-{{--                            <td class="text-center">--}}
-{{--                                <img class="img-avatar img-avatar48" src="{{$category->image ? asset('storage/'.$category->image) : asset('images/no-image.png')}}" alt="">--}}
-{{--                            </td>--}}
-{{--                            <td class="fw-semibold">{{$category->name}}</td>--}}
-{{--                            <td class="text-center">--}}
-{{--                                <div class="btn-group">--}}
-{{--                                    <button type="button" class="btn btn-sm btn-secondary" title="Edit" data-bs-toggle="modal" data-bs-target="#edit-category-modal" data-cat_id="{{$category->cat_id}}">--}}
-{{--                                        <i class="fa fa-pencil-alt"></i>--}}
-{{--                                    </button>--}}
-{{--                                    <button type="button" class="btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#delete-category-modal" data-cat_id="{{$category->cat_id}}">--}}
-{{--                                        <i class="fa fa-times"></i>--}}
-{{--                                    </button>--}}
-{{--                                </div>--}}
-{{--                            </td>--}}
-{{--                        </tr>--}}
-{{--                    @endforeach--}}
+                    @foreach($subcategories as $subcategory)
+                        <tr>
+                            <td class="text-center">
+                                <img class="img-avatar img-avatar48" src="{{$subcategory->image ? asset('storage/'.$subcategory->image) : asset('images/no-image.png')}}" alt="">
+                            </td>
+                            <td class="fw-semibold">{{$subcategory->name}}</td>
+                            <td class="fw-semibold">{{$subcategory->category_name}}</td>
+                            <td class="text-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-secondary" title="Edit" data-bs-toggle="modal" data-bs-target="#edit-category-modal" data-sub_cat_id="{{$subcategory->sub_cat_id}}">
+                                        <i class="fa fa-pencil-alt"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#delete-category-modal" data-sub_cat_id="{{$subcategory->sub_cat_id}}">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
 
                     </tbody>
                 </table>
