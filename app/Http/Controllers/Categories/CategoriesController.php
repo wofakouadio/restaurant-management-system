@@ -105,4 +105,13 @@ class CategoriesController extends Controller
         ]);
     }
 
+    public function categories_dropdown(){
+        $output = [];
+        $categories = Category::select('cat_id', 'name')->get();
+        foreach ($categories as $category){
+            $output[] .= "<option value='".$category->cat_id."'>".$category->name."</option>";
+        }
+        return $output;
+    }
+
 }
