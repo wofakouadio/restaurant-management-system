@@ -3,7 +3,7 @@
     {{--  Alerts  --}}
     $(".sub-category-alert").hide()
 
-    // Add new Category
+    // Add new Sub-Category
     $(document).on("submit", "#sa-new-sub-category-form", (e)=>{
         e.preventDefault()
         $.ajaxSetup({
@@ -77,74 +77,75 @@
         })
     })
 
-    //Show Category Info in Edit Modal
-    $(document).on("show.bs.modal", "#edit-category-modal", (event)=>{
+    //Show Sub-Category Info in Edit Modal
+    $(document).on("show.bs.modal", "#edit-sub-category-modal", (event)=>{
         let str = $(event.relatedTarget)
-        let cat_id = str.data('cat_id')
-        let modal = $("#edit-category-modal")
+        let sub_cat_id = str.data('sub_cat_id')
+        let modal = $("#edit-sub-category-modal")
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
         $.ajax({
-            url:'{{route('sa.get-category')}}',
+            url:'{{route('sa.get-sub-category')}}',
             method:'GET',
             cache:false,
-            data: {cat_id:cat_id},
+            data: {sub_cat_id:sub_cat_id},
             success:(response)=>{
                 let StringResults = JSON.stringify(response)
                 let DecodedResults = JSON.parse(StringResults)
                 if(DecodedResults.status === 201){
-                    modal.find(".category-alert").removeClass('alert-success')
-                    modal.find(".category-alert").removeClass('alert-warning')
-                    modal.find(".category-alert").show().addClass('alert-danger').html(DecodedResults.msg)
+                    modal.find(".sub-category-alert").removeClass('alert-success')
+                    modal.find(".sub-category-alert").removeClass('alert-warning')
+                    modal.find(".sub-category-alert").show().addClass('alert-danger').html(DecodedResults.msg)
                 }else{
-                    modal.find(".category-alert").removeClass('alert-danger')
-                    modal.find(".category-alert").removeClass('alert-warning')
+                    modal.find(".sub-category-alert").removeClass('alert-danger')
+                    modal.find(".sub-category-alert").removeClass('alert-warning')
                     modal.find("input[name=name]").val(DecodedResults.data[0].name)
-                    modal.find("input[name=cat_id]").val(DecodedResults.data[0].cat_id)
+                    modal.find("input[name=sub_cat_id]").val(DecodedResults.data[0].sub_cat_id)
                     modal.find(".cat-profile-picture").html('<img src="../storage/'+DecodedResults.data[0].image+'" class="img" width="200px"/>')
                     modal.find("input[name=fetched-image]").val(DecodedResults.data[0].image)
+                    modal.find("select[name=cat-id]").val(DecodedResults.data[0].cat_id)
                 }
             }
         })
     })
 
-    // Show Category Info in Delete Modal
-    $(document).on("show.bs.modal", "#delete-category-modal", (event)=>{
+    // Show Sub-Category Info in Delete Modal
+    $(document).on("show.bs.modal", "#delete-sub-category-modal", (event)=>{
         let str = $(event.relatedTarget)
-        let cat_id = str.data('cat_id')
-        let modal = $("#delete-category-modal")
+        let sub_cat_id = str.data('sub_cat_id')
+        let modal = $("#delete-sub-category-modal")
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
         $.ajax({
-            url:'{{route('sa.get-category')}}',
+            url:'{{route('sa.get-sub-category')}}',
             method:'GET',
             cache:false,
-            data: {cat_id:cat_id},
+            data: {sub_cat_id:sub_cat_id},
             success:(response)=>{
                 let StringResults = JSON.stringify(response)
                 let DecodedResults = JSON.parse(StringResults)
                 if(DecodedResults.status === 201){
-                    modal.find(".category-alert").removeClass('alert-success')
-                    modal.find(".category-alert").removeClass('alert-warning')
+                    modal.find(".sub-category-alert").removeClass('alert-success')
+                    modal.find(".sub-category-alert").removeClass('alert-warning')
                     modal.modal('hide')
                 }else{
-                    modal.find(".category-alert").removeClass('alert-danger')
-                    modal.find(".category-alert").removeClass('alert-warning')
-                    modal.find("#delete-notice").html("Are you sure of deleting " +DecodedResults.data[0].name + " category ?")
-                    modal.find("input[name=cat-id]").val(DecodedResults.data[0].cat_id)
+                    modal.find(".sub-category-alert").removeClass('alert-danger')
+                    modal.find(".sub-category-alert").removeClass('alert-warning')
+                    modal.find("#delete-notice").html("Are you sure of deleting " +DecodedResults.data[0].name + " sub-category ?")
+                    modal.find("input[name=sub-cat-id]").val(DecodedResults.data[0].sub_cat_id)
                 }
             }
         })
     })
 
-    //Update Category Info in Edit modal
-    $(document).on("submit", "#sa-update-category-form", (e)=>{
+    //Update Sub-Category Info in Edit modal
+    $(document).on("submit", "#sa-update-sub-category-form", (e)=>{
         e.preventDefault()
         $.ajaxSetup({
             headers: {
@@ -206,8 +207,8 @@
         })
     })
 
-    // Delete Category Info in Delete modal
-    $(document).on("submit", "#sa-delete-category-form", (e)=>{
+    // Delete Sub-Category Info in Delete modal
+    $(document).on("submit", "#sa-delete-sub-category-form", (e)=>{
         e.preventDefault()
         $.ajaxSetup({
             headers: {
