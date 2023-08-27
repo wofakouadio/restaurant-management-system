@@ -59,6 +59,7 @@ Route::middleware('super-admin')->prefix('super-admin')->group(function (){
     Route::controller(SubCategoriesController::class)->group(function(){
         Route::get('/sub-categories', 'index')->name('sa.sub-categories');
         Route::post('/new-sub-category', 'store')->name('sa.new-sub-category');
+        Route::get('/get-sub-category', 'edit')->name('sa.get-sub-category');
     });
 
 //    Route::post('/new-category', [CategoriesController::class, 'store'])->name('sa.new-category');
