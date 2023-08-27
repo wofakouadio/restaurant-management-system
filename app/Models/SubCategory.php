@@ -15,9 +15,10 @@ class SubCategory extends Model
         'sub_cat_id'
     ];
 
-    protected $table = 'sub-categories';
+    protected $table = 'sub_categories';
+//    protected $primaryKey = 'cat_sub_id';
 
     public function category(){
-        return $this->belongsTo(Category::class, 'cat_id');
+        return $this->hasMany(SubCategory::class, 'cat_id');
     }
 }
