@@ -30,10 +30,10 @@
                             <td class="fw-semibold">{{$subcategory->category_name}}</td>
                             <td class="text-center">
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-secondary" title="Edit" data-bs-toggle="modal" data-bs-target="#edit-category-modal" data-sub_cat_id="{{$subcategory->sub_cat_id}}">
+                                    <button type="button" class="btn btn-sm btn-secondary" title="Edit" data-bs-toggle="modal" data-bs-target="#edit-sub-category-modal" data-sub_cat_id="{{$subcategory->sub_cat_id}}">
                                         <i class="fa fa-pencil-alt"></i>
                                     </button>
-                                    <button type="button" class="btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#delete-category-modal" data-sub_cat_id="{{$subcategory->sub_cat_id}}">
+                                    <button type="button" class="btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#delete-sub-category-modal" data-sub_cat_id="{{$subcategory->sub_cat_id}}">
                                         <i class="fa fa-times"></i>
                                     </button>
                                 </div>
