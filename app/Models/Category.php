@@ -20,7 +20,7 @@ class Category extends Model
 //    protected $primaryKey = 'cat_id';
 
     public function subcategory(){
-        return $this->hasMany(SubCategory::class, 'cat_id');
+        return $this->belongsTo(Category::class, 'cat_id');
     }
 
 }
