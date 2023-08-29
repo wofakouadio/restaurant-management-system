@@ -63,7 +63,7 @@ Route::middleware('super-admin')->prefix('super-admin')->group(function (){
         Route::get('/get-sub-category', 'edit')->name('sa.get-sub-category');
         Route::put('/update-sub-category', 'update')->name('sa.update-sub-category');
         Route::delete('/delete-sub-category', 'delete')->name('sa.delete-sub-category');
-        Route::get('/get-sub-categories-in-dropdown', 'sub_categories_dropdown')->name('sa.sub-categories-dropdown');
+        Route::get('/get-sub-categories-in-dropdown', 'sub_categories_dropdown')->name('sa.sub-categories-dropdown-based-on-category');
     });
 
     /** Menu **/
