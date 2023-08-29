@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Categories\CategoriesController;
 use App\Http\Controllers\categories\SubCategoriesController;
+use App\Http\Controllers\Menu\MenuController;
 use App\Http\Controllers\SuperAdmin\SuperAdminController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -62,6 +63,13 @@ Route::middleware('super-admin')->prefix('super-admin')->group(function (){
         Route::get('/get-sub-category', 'edit')->name('sa.get-sub-category');
         Route::put('/update-sub-category', 'update')->name('sa.update-sub-category');
         Route::delete('/delete-sub-category', 'delete')->name('sa.delete-sub-category');
+        Route::get('/get-sub-categories-in-dropdown', 'sub_categories_dropdown')->name('sa.sub-categories-dropdown');
+    });
+
+    /** Menu **/
+    Route::controller(MenuController::class)->group(function (){
+        Route::get('/new-menu', 'index')->name('sa.new-menu');
+        Route::post('/add-new-menu', 'store')->name('sa.add-new-menu');
     });
 
 //    Route::post('/new-category', [CategoriesController::class, 'store'])->name('sa.new-category');
