@@ -45,5 +45,6 @@
 @include('js-scripts.sa-users-js')
 @include('js-scripts.sa-categories-js')
 @include('js-scripts.sa-sub-categories-js')
+@include('js-scripts.sa-menus-js')
 </body>
 </html>
