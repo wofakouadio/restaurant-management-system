@@ -438,7 +438,7 @@
                     @csrf
                     @method('DELETE')
                     <div class="block-header block-header-default">
-                        <h3 class="block-title">Delete Category</h3>
+                        <h3 class="block-title">Delete Sub-Category</h3>
                         <div class="block-options">
                             <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
                                 <i class="fa fa-times"></i>
