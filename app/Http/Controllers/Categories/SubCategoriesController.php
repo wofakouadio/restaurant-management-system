@@ -13,8 +13,6 @@ class SubCategoriesController extends Controller
 {
     public function index(){
         $subcategories = DB::table('sub_categories')->join('categories', 'categories.cat_id', '=', 'sub_categories.cat_id')->select('sub_categories.sub_cat_id', 'sub_categories.image', 'categories.name as category_name', 'sub_categories.name')->get();
-//        $subcategories = subcategory::all();
-//        dd($subcategories);
         return view('super-admin.sub-categories', compact('subcategories'));
     }
 
@@ -112,5 +110,14 @@ class SubCategoriesController extends Controller
             'status' => 201,
             'msg' => 'Error : Something went wrong'
         ]);
+    }
+
+    public function sub_categories_dropdown(Request $request){
+        $output = [];
+        $subcategories = SubCategory::select('sub_cat_id', 'name')->where('cat_id', $request['cat-id'])->get();
+        foreach ($subcategories as $subcategory){
+            $output[] .= "<option value='".$subcategory->sub_cat_id."'>".$subcategory->name."</option>";
+        }
+        return $output;
     }
 }
