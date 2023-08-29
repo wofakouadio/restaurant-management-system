@@ -44,13 +44,13 @@
                         </a>
                     </li>
                     <li class="nav-main-item">
-                        <a class="nav-main-link{{url()->current() == route('sa.sub-categories') ? 'active': ''}}" href="{{route('sa.sub-categories')}}">
+                        <a class="nav-main-link {{url()->current() == route('sa.sub-categories') ? 'active': ''}}" href="{{route('sa.sub-categories')}}">
                             <i class="nav-main-link-icon fa fa-pencil-ruler"></i>
                             <span class="nav-main-link-name">Sub-Categories</span>
                         </a>
                     </li>
                     <li class="nav-main-item">
-                        <a class="nav-main-link{{url()->current() == route('sa.new-menu') ? 'active': ''}}" href="{{route('sa.new-menu')}}">
+                        <a class="nav-main-link {{url()->current() == route('sa.new-menu') ? 'active': ''}}" href="{{route('sa.new-menu')}}">
                             <i class="nav-main-link-icon fa fa-book-open-reader"></i>
                             <span class="nav-main-link-name">New Menu</span>
                         </a>
