@@ -12,89 +12,93 @@
             <div class="block-content">
                 <form action="{{route('sa.add-new-menu')}}" method="POST" enctype="multipart/form-data" id="sa-new-menu-form">
                     @csrf
-                    <div class="alert alert-danger" id="new-user-form-alert"></div>
+                    <div class="alert alert-danger new-menu-form-alert"></div>
                     <div class="row mb-4">
                         <div class="col">
-                            <label class="form-label" for="mega-firstname">Firstname</label>
-                            <input type="text" class="form-control form-control-lg" id="mega-firstname" name="firstname" placeholder="Enter your firstname..">
-                            <span class="text-danger" id="firstname-err"></span>
+                            <label class="form-label">Name</label>
+                            <input type="text" class="form-control form-control-lg" name="name" placeholder="Enter your menu..">
+                            <span class="text-danger" id="name-err"></span>
                         </div>
                         <div class="col">
-                            <label class="form-label" for="mega-middlename">MiddleName</label>
-                            <input type="text" class="form-control form-control-lg" id="mega-middlename" name="middlename" placeholder="Enter your middlename..">
-                        </div>
-                        <div class="col">
-                            <label class="form-label" for="mega-lastname">Lastname</label>
-                            <input type="text" class="form-control form-control-lg" id="mega-lastname" name="lastname" placeholder="Enter your lastname..">
-                            <span class="text-danger" id="lastname-err"></span>
-                        </div>
-                    </div>
-                    <div class="row mb-4">
-                        <div class="col">
-                            <label class="form-label" for="mega-dob">Date of Birth</label>
-                            <input type="text" class="js-flatpickr form-control form-control-lg" id="example-flatpickr-default"  name="dob" placeholder="Y-m-d">
-                            <span class="text-danger" id="dob-err"></span>
-                        </div>
-                        <div class="col">
-                            <label class="form-label" for="mega-placeofbirth">Place of Birth</label>
-                            <input type="text" class="form-control form-control-lg" id="mega-placeofbirth" name="placeofbirth" placeholder="Enter your place of birth..">
-                            <span class="text-danger" id="placeofbirth-err"></span>
-                        </div>
-                        <div class="col">
-                            <label class="form-label" for="mega-gender">Gender</label>
-                            <select class="form-select form-control form-control-lg" id="mega-gender" name="gender">
+                            <label class="form-label">Category</label>
+                            <select name="cat-id" class="js-select2 form-control form-control-lg">
                                 <option value="">Choose</option>
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
                             </select>
-                            <span class="text-danger" id="gender-err"></span>
+                            <span class="text-danger" id="category-err"></span>
+                        </div>
+                        <div class="col">
+                            <label class="form-label">Sub-Category</label>
+                            <select name="sub-cat-id" class="js-select2 form-control form-control-lg">
+                                <option value="">Choose</option>
+                            </select>
+                            <span class="text-danger" id="sub-category-err"></span>
                         </div>
                     </div>
                     <div class="row mb-4">
                         <div class="col">
-                            <label class="form-label" for="mega-address-1">Main Address</label>
-                            <input type="text" class="form-control form-control-lg" id="mega-address-1" name="address" placeholder="Enter your address..">
-                            <span class="text-danger" id="main-address-err"></span>
+                            <label class="form-label">Description</label>
+                            <textarea name="description" class="form-control form-control-lg" cols="10" rows="5"></textarea>
+                            <span class="text-danger" id="description-err"></span>
                         </div>
                         <div class="col">
-                            <label class="form-label" for="mega-address-2">Secondary Address</label>
-                            <input type="text" class="form-control form-control-lg" id="mega-address-2" name="secondary-address" placeholder="Enter your secondary address..">
+                            <label class="form-label">Extra</label>
+                            <textarea name="extra" class="form-control form-control-lg" cols="10" rows="5"></textarea>
+                            <span class="text-danger" id="extra-err"></span>
+                        </div>
+                        <div class="col">
+                            <div class="mb-4">
+                                <label>Pricing</label>
+                                <input type="text" class="form-control form-control-lg" name="price">
+                                <span class="text-danger" id="price-err"></span>
+                            </div>
+                            <div class="mb-4">
+                                <label>Discount</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control form-control-lg" name="discount">
+                                    <span class="input-group-text">
+                                        <b>%</b>
+                                    </span>
+                                </div>
+                                <span class="text-danger" id="discount-err"></span>
+                            </div>
                         </div>
                     </div>
                     <div class="row mb-4">
                         <div class="col">
-                            <label class="form-label" for="mega-contact1">Contact[Mobile]</label>
-                            <input type="text" class="form-control form-control-lg" id="mega-contact1" name="contact" placeholder="Enter your contact..">
-                            <span class="text-danger" id="main-contact-err"></span>
+                            <div class="mb-4">
+                                <label class="form-label">Size</label>
+                                <div class="space-x-2">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" value="Small" id="example-checkbox-inline1" name="size[]">
+                                        <label class="form-check-label" for="example-checkbox-inline1">Small</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" value="Medium" id="example-checkbox-inline2" name="size[]">
+                                        <label class="form-check-label" for="example-checkbox-inline2">Medium</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" value="Large" id="example-checkbox-inline3" name="size[]">
+                                        <label class="form-check-label" for="example-checkbox-inline3">Large</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" value="XLarge" id="example-checkbox-inline4" name="size[]">
+                                        <label class="form-check-label" for="example-checkbox-inline4">XLarge</label>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col">
-                            <label class="form-label" for="mega-contact-2">Phone</label>
-                            <input type="text" class="form-control form-control-lg" id="mega-contact-2" name="secondary-contact" placeholder="Enter your secondary contact..">
-                        </div>
-                    </div>
-                    <div class="row mb-4">
-                        <div class="col">
-                            <label class="form-label" for="mega-email">Email Address</label>
-                            <input type="text" class="form-control form-control-lg" id="mega-email" name="email" placeholder="Enter your email address..">
-                            <span class="text-danger" id="email-address-err"></span>
-                        </div>
-                        <div class="col">
-                            <label class="form-label" for="mega-username">Username</label>
-                            <input type="text" class="form-control form-control-lg" id="mega-username" name="username" placeholder="Enter your username..">
-                            <span class="text-danger" id="username-err"></span>
-                        </div>
-                    </div>
-                    <div class="row mb-4">
                         <div class="col">
                             <label class="form-label" for="example-file-input">Upload Profile Picture</label>
                             <input class="form-control form-control-lg" type="file" id="example-file-input" name="profile-picture">
                         </div>
                         <div class="col">
-                            <label class="form-label" for="mega-role">Role</label>
-                            <select class="form-select form-control form-control-lg" id="mega-role" name="role">
+                            <label class="form-label" for="mega-role">Status</label>
+                            <select class="form-select form-control form-control-lg" name="status">
                                 <option value="">Choose</option>
+                                <option value="1">Available</option>
+                                <option value="2">Out</option>
                             </select>
-                            <span class="text-danger" id="role-type-err"></span>
+                            <span class="text-danger" id="status-err"></span>
                         </div>
                     </div>
                     <div class="mb-4">
