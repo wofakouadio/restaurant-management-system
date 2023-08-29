@@ -115,6 +115,7 @@ class SubCategoriesController extends Controller
     public function sub_categories_dropdown(Request $request){
         $output = [];
         $subcategories = SubCategory::select('sub_cat_id', 'name')->where('cat_id', $request['cat-id'])->get();
+        $output[] .= "<option value=''>Choose</option>";
         foreach ($subcategories as $subcategory){
             $output[] .= "<option value='".$subcategory->sub_cat_id."'>".$subcategory->name."</option>";
         }
