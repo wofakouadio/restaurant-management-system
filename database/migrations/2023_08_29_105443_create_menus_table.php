@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('discount');
             $table->string('cat_id');
             $table->string('sub_cat_id');
-            $table->longText('reviews');
+            $table->longText('reviews')->nullable();
             $table->tinyInteger('status');
             $table->string('image');
             $table->timestamps();
