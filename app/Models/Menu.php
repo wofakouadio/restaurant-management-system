@@ -17,12 +17,21 @@ class Menu extends Model
         'extra',
         'price',
         'discount',
-        'category',
-        'subcategory',
-        'review',
+        'cat_id',
+        'sub_cat_id',
+        'reviews',
         'status',
         'image'
     ];
 
     protected $table = 'menus';
+
+    public function setSizeAttributes($value): void
+    {
+        $this->attributes['size'] = json_encode($value);
+    }
+
+    public function getSizeAttributes($value){
+        return $this->attributes['size'] = json_decode($value);
+    }
 }
