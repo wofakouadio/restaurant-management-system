@@ -12,7 +12,7 @@
             <div class="block-content">
                 <form action="{{route('sa.add-new-menu')}}" method="POST" enctype="multipart/form-data" id="sa-new-menu-form">
                     @csrf
-                    <div class="alert alert-danger new-menu-form-alert"></div>
+                    <div class="alert alert-danger menu-alert"></div>
                     <div class="row mb-4">
                         <div class="col">
                             <label class="form-label">Name</label>
