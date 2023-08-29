@@ -12,8 +12,22 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('menus', function (Blueprint $table) {
-            $table->id();
+            $table->string('menu_id')->primary();
+            $table->string('name');
+            $table->longText('description');
+            $table->string('size')->nullable();
+            $table->string('extra')->nullable();
+            $table->string('price');
+            $table->string('discount');
+            $table->string('cat_id');
+            $table->string('sub_cat_id');
+            $table->longText('reviews');
+            $table->tinyInteger('status');
+            $table->string('image');
             $table->timestamps();
+
+            $table->foreign('cat_id')->references('cat_id')->on('categories')->onDelete('cascade');
+            $table->foreign('sub_cat_id')->references('sub_cat_id')->on('sub_categories')->onDelete('cascade');
         });
     }
 
