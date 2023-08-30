@@ -56,7 +56,7 @@
                         </a>
                     </li>
                     <li class="nav-main-item">
-                        <a class="nav-main-link" href="#">
+                        <a class="nav-main-link {{url()->current() == route('sa.all-menus') ? 'active': ''}}" href="{{route('sa.all-menus')}}">
                             <i class="nav-main-link-icon fa fa-book-reader"></i>
                             <span class="nav-main-link-name">All Menus</span>
                         </a>
