@@ -70,6 +70,7 @@ Route::middleware('super-admin')->prefix('super-admin')->group(function (){
     Route::controller(MenuController::class)->group(function (){
         Route::get('/new-menu', 'index')->name('sa.new-menu');
         Route::post('/add-new-menu', 'store')->name('sa.add-new-menu');
+        Route::get('/menus', 'show')->name('sa.all-menus');
     });
 
 //    Route::post('/new-category', [CategoriesController::class, 'store'])->name('sa.new-category');
