@@ -72,4 +72,21 @@ class MenuController extends Controller
         $menus = DB::table('menus')->join('categories', 'categories.cat_id', '=', 'menus.cat_id')->join('sub_categories', 'sub_categories.sub_cat_id', '=', 'menus.sub_cat_id')->select('menus.name', 'menus.image', 'menus.price', 'menus.discount', 'menus.status', 'menus.menu_id', 'categories.name as category_name', 'sub_categories.name as sub_category_name')->get();
         return view('super-admin.menus', compact('menus'));
     }
+
+    public function edit(Request $request){
+        try {
+            $getMenu = Menu::where('menu_id', $request['menu_id'])->get();
+            return response()->json([
+                'status' => 200,
+                'msg' => 'Data found',
+                'data' => $getMenu
+            ]);
+        } catch (\Exception $e){
+            return response()->json([
+                'status' => 201,
+                'msg' => 'Data not found. Error : ' . $e->getMessage(),
+                'data' => $getMenu
+            ]);
+        }
+    }
 }
