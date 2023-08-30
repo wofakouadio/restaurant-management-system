@@ -48,4 +48,14 @@
             </nav>
         </div>
     </div>
+@elseif(url()->current() === route('sa.all-menus'))
+    <div class="bg-body-light border-bottom">
+        <div class="content py-1 text-center">
+            <nav class="breadcrumb bg-body-light py-2 mb-0">
+                <span class="breadcrumb-item">Home</span>
+                <span class="breadcrumb-item">Kits</span>
+                <a class="breadcrumb-item active text-warning" href="{{route('sa.all-menus')}}">Menus</a>
+            </nav>
+        </div>
+    </div>
 @endif
