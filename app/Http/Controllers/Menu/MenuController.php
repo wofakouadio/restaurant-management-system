@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Menu;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MenuController extends Controller
 {
@@ -65,5 +66,10 @@ class MenuController extends Controller
             'status' => 201,
             'msg' => 'Error: something went wrong'
         ]);
+    }
+
+    public function show(){
+        $menus = DB::table('menus')->join('categories', 'categories.cat_id', '=', 'menus.cat_id')->join('sub_categories', 'sub_categories.sub_cat_id', '=', 'menus.sub_cat_id')->select('menus.name', 'menus.image', 'menus.price', 'menus.discount', 'menus.status', 'menus.menu_id', 'categories.name as category_name', 'sub_categories.name as sub_category_name')->get();
+        return view('super-admin.menus', compact('menus'));
     }
 }
