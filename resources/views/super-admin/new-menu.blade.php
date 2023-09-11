@@ -64,29 +64,29 @@
                         </div>
                     </div>
                     <div class="row mb-4">
-                        <div class="col">
-                            <div class="mb-4">
-                                <label class="form-label">Size</label>
-                                <div class="space-x-2">
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" value="Small" id="example-checkbox-inline1" name="size[]">
-                                        <label class="form-check-label" for="example-checkbox-inline1">Small</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" value="Medium" id="example-checkbox-inline2" name="size[]">
-                                        <label class="form-check-label" for="example-checkbox-inline2">Medium</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" value="Large" id="example-checkbox-inline3" name="size[]">
-                                        <label class="form-check-label" for="example-checkbox-inline3">Large</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" value="XLarge" id="example-checkbox-inline4" name="size[]">
-                                        <label class="form-check-label" for="example-checkbox-inline4">XLarge</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+{{--                        <div class="col">--}}
+{{--                            <div class="mb-4">--}}
+{{--                                <label class="form-label">Size</label>--}}
+{{--                                <div class="space-x-2">--}}
+{{--                                    <div class="form-check form-check-inline">--}}
+{{--                                        <input class="form-check-input" type="checkbox" value="Small" id="example-checkbox-inline1" name="size[]">--}}
+{{--                                        <label class="form-check-label" for="example-checkbox-inline1">Small</label>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="form-check form-check-inline">--}}
+{{--                                        <input class="form-check-input" type="checkbox" value="Medium" id="example-checkbox-inline2" name="size[]">--}}
+{{--                                        <label class="form-check-label" for="example-checkbox-inline2">Medium</label>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="form-check form-check-inline">--}}
+{{--                                        <input class="form-check-input" type="checkbox" value="Large" id="example-checkbox-inline3" name="size[]">--}}
+{{--                                        <label class="form-check-label" for="example-checkbox-inline3">Large</label>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="form-check form-check-inline">--}}
+{{--                                        <input class="form-check-input" type="checkbox" value="XLarge" id="example-checkbox-inline4" name="size[]">--}}
+{{--                                        <label class="form-check-label" for="example-checkbox-inline4">XLarge</label>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
                         <div class="col">
                             <label class="form-label" for="example-file-input">Upload Profile Picture</label>
                             <input class="form-control form-control-lg" type="file" id="example-file-input" name="profile-picture">
