@@ -38,6 +38,24 @@
     }
     AllCategoriesInDropdown()
 
+    // constant to get all Sub-Categories
+    const AllSubCategories = () =>{
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url:'{{route('sa.get-sub-categories')}}',
+            method:'GET',
+            cache:false,
+            success:(Response)=>{
+                $("#edit-menu-modal").find("select[name=sub-cat-id]").append(Response)
+            }
+        })
+    }
+    AllSubCategories()
+
     {{--function SubCategoriesBasedOnCategory(category_id){--}}
     {{--    $.ajaxSetup({--}}
     {{--        headers: {--}}
