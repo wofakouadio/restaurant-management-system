@@ -30,7 +30,7 @@
                                 <img class="img-avatar img-avatar48" src="{{$menu->image ? asset('storage/'.$menu->image) : asset('images/no-image.png')}}" alt="img">
                             </td>
                             <td class="fw-semibold">{{$menu->name}}</td>
-                            <td class="fw-semibold">{{$menu->price}}</td>
+                            <td class="fw-semibold">GH₵ {{$menu->price}}</td>
                             <td class="fw-semibold">{{$menu->discount}} %</td>
                             <td class="fw-semibold">{{$menu->category_name}}</td>
                             <td class="fw-semibold">{{$menu->sub_category_name}}</td>
