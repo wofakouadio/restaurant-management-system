@@ -36,11 +36,11 @@ class MenuController extends Controller
         }
 
 //        $request['size'] = $request->input('size');
-        if($request['size']){
-            $size = implode(',', $request['size']);
-        }else{
-            $size = '';
-        }
+//        if($request['size']){
+//            $size = implode(',', $request['size']);
+//        }else{
+//            $size = '';
+//        }
 
         $Sql = Menu::create([
             'cat_id' => $request['cat-id'],
@@ -52,7 +52,7 @@ class MenuController extends Controller
             'price' => $request['price'],
             'discount' => $request['discount'],
             'status' => $request['status'],
-            'size' => $size,
+//            'size' => $size,
             'menu_id' => $request['menu_id']
         ]);
 
@@ -88,5 +88,60 @@ class MenuController extends Controller
                 'data' => $getMenu
             ]);
         }
+    }
+
+    public function update(Request $request){
+        $request->validate([
+            'name' => 'required',
+            'cat-id' => 'required',
+            'sub-cat-id' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'discount' => 'required',
+            'status' => 'required'
+        ]);
+
+        if ($request->hasFile('profile-picture')) {
+            $profile_picture =  $request->file('profile-picture')->store('items/menus', 'public');
+        }else{
+            $profile_picture = $request['fetched-picture'];
+        }
+
+        $Sql = Menu::where('menu_id', $request['menu_id'])->update([
+            'cat_id' => $request['cat-id'],
+            'name' => strtoupper($request['name']),
+            'image' => $profile_picture,
+            'sub_cat_id' => $request['sub-cat-id'],
+            'description' => $request['description'],
+            'extra' => $request['extra'],
+            'price' => $request['price'],
+            'discount' => $request['discount'],
+            'status' => $request['status']
+        ]);
+
+        if($Sql){
+            return response()->json([
+                'status' => 200,
+                'msg' => 'Menu Updated successfully'
+            ]);
+        }
+        return response()->json([
+            'status' => 201,
+            'msg' => 'Error: something went wrong'
+        ]);
+    }
+
+    public function delete(Request $request){
+        $Sql = Menu::where('menu_id', $request['menu_id'])->delete();
+        if($Sql){
+            return response()->json([
+                'status' => 200,
+                'msg' => 'Menu deleted successfully'
+            ]);
+        }
+        return response()->json([
+            'status' => 201,
+            'msg' => 'Error : Something went wrong'
+        ]);
     }
 }
