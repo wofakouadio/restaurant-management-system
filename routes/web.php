@@ -64,6 +64,7 @@ Route::middleware('super-admin')->prefix('super-admin')->group(function (){
         Route::put('/update-sub-category', 'update')->name('sa.update-sub-category');
         Route::delete('/delete-sub-category', 'delete')->name('sa.delete-sub-category');
         Route::get('/get-sub-categories-in-dropdown', 'sub_categories_dropdown')->name('sa.sub-categories-dropdown-based-on-category');
+        Route::get('/get-sub-categories', 'sub_categories')->name('sa.get-sub-categories');
     });
 
     /** Menu **/
@@ -72,6 +73,8 @@ Route::middleware('super-admin')->prefix('super-admin')->group(function (){
         Route::post('/add-new-menu', 'store')->name('sa.add-new-menu');
         Route::get('/menus', 'show')->name('sa.all-menus');
         Route::get('/get-menu', 'edit')->name('sa.get-menu');
+        Route::put('/update-menu', 'update')->name('sa.update-menu');
+        Route::delete('/delete-menu', 'delete')->name('sa.delete-menu');
     });
 
 //    Route::post('/new-category', [CategoriesController::class, 'store'])->name('sa.new-category');
