@@ -121,4 +121,14 @@ class SubCategoriesController extends Controller
         }
         return $output;
     }
+
+    public function sub_categories(){
+        $output = [];
+        $subcategories = SubCategory::select('sub_cat_id', 'name')->get();
+        $output[] .= "<option value=''>Choose</option>";
+        foreach ($subcategories as $subcategory){
+            $output[] .= "<option value='".$subcategory->sub_cat_id."'>".$subcategory->name."</option>";
+        }
+        return $output;
+    }
 }
