@@ -501,15 +501,13 @@
                             </div>
                             <div class="col">
                                 <label class="form-label">Category</label>
-                                <select name="cat-id" class="js-select2 form-control form-control-lg" style="width: 100%;" data-container="#edit-menu-modal" data-placeholder="Choose one..">
-                                    <option></option>
+                                <select name="cat-id" class="form-select form-control form-control-lg" style="width: 100%;">
                                 </select>
                                 <span class="text-danger" id="category-err"></span>
                             </div>
                             <div class="col">
                                 <label class="form-label">Sub-Category</label>
-                                <select name="sub-cat-id" class="js-select2 form-control form-control-lg" style="width: 100%;" data-container="#edit-menu-modal" data-placeholder="Choose one..">
-                                    <option value="">Choose</option>
+                                <select name="sub-cat-id" class="form-select form-control form-control-lg" style="width: 100%;">
                                 </select>
                                 <span class="text-danger" id="sub-category-err"></span>
                             </div>
@@ -544,29 +542,30 @@
                             </div>
                         </div>
                         <div class="row mb-4">
-                            <div class="col">
-                                <div class="mb-4">
-                                    <label class="form-label">Size</label>
-                                    <div class="space-x-2">
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" value="Small" id="example-checkbox-inline1" name="size[]">
-                                            <label class="form-check-label" for="example-checkbox-inline1">Small</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" value="Medium" id="example-checkbox-inline2" name="size[]">
-                                            <label class="form-check-label" for="example-checkbox-inline2">Medium</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" value="Large" id="example-checkbox-inline3" name="size[]">
-                                            <label class="form-check-label" for="example-checkbox-inline3">Large</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" value="XLarge" id="example-checkbox-inline4" name="size[]">
-                                            <label class="form-check-label" for="example-checkbox-inline4">XLarge</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+{{--                            <div class="col">--}}
+{{--                                <div class="mb-4">--}}
+{{--                                    <label class="form-label">Size</label>--}}
+{{--                                    <div class="space-x-2">--}}
+{{--                                        <div class="form-check form-check-inline">--}}
+{{--                                            <input class="form-check-input" type="checkbox" value="Small" id="example-checkbox-inline1" name="size[]">--}}
+{{--                                            <label class="form-check-label" for="example-checkbox-inline1">Small</label>--}}
+{{--                                        </div>--}}
+{{--                                        <div class="form-check form-check-inline">--}}
+{{--                                            <input class="form-check-input" type="checkbox" value="Medium" id="example-checkbox-inline2" name="size[]">--}}
+{{--                                            <label class="form-check-label" for="example-checkbox-inline2">Medium</label>--}}
+{{--                                        </div>--}}
+{{--                                        <div class="form-check form-check-inline">--}}
+{{--                                            <input class="form-check-input" type="checkbox" value="Large" id="example-checkbox-inline3" name="size[]">--}}
+{{--                                            <label class="form-check-label" for="example-checkbox-inline3">Large</label>--}}
+{{--                                        </div>--}}
+{{--                                        <div class="form-check form-check-inline">--}}
+{{--                                            <input class="form-check-input" type="checkbox" value="XLarge" id="example-checkbox-inline4" name="size[]">--}}
+{{--                                            <label class="form-check-label" for="example-checkbox-inline4">XLarge</label>--}}
+{{--                                        </div>--}}
+{{--                                        <input type="text" name="selected-size" readonly class="form-control form-control-lg">--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
                             <div class="col">
                                 <label class="form-label" for="example-file-input">Upload Profile Picture</label>
                                 <input class="form-control form-control-lg" type="file" id="example-file-input" name="profile-picture">
@@ -587,7 +586,7 @@
                         <button type="button" class="btn btn-alt-secondary" data-bs-dismiss="modal">
                             Close
                         </button>
-                        <button type="submit" class="btn btn-alt-primary" name="btn-new-category" id="btn-new-category">
+                        <button type="submit" class="btn btn-alt-primary" name="btn-update" id="btn-update">
                             <i class="fa fa-check opacity-50 me-1"></i> Update
                         </button>
                     </div>
@@ -603,7 +602,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="block block-rounded shadow-none mb-0">
-                <form action="" method="POST" id="sa-delete-sub-category-form">
+                <form action="" method="POST" id="sa-delete-menu-form">
                     @csrf
                     @method('DELETE')
                     <div class="block-header block-header-default">
@@ -619,7 +618,7 @@
                         <div class="block block-rounded shadow-none mb-0">
                             <div class="col">
                                 <h2 class="h4 fw-normal" id="delete-notice"></h2>
-                                <input type="hidden" name="sub-cat-id"/>
+                                <input type="hidden" name="menu_id"/>
                             </div>
                         </div>
                     </div>
@@ -638,4 +637,5 @@
     </div>
 </div>
 <!-- Delete Menu Info Modal -->
+
 {{---------------MENUS---------------}}
