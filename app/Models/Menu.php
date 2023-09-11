@@ -13,7 +13,7 @@ class Menu extends Model
         'menu_id',
         'name',
         'description',
-        'size',
+//        'size',
         'extra',
         'price',
         'discount',
