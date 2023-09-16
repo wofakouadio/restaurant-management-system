@@ -56,6 +56,41 @@
     }
     AllSubCategories()
 
+    // constant to get total pending/placed orders
+    const PendingOrders = () =>{
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url:'{{route('sa.pending-orders-counter')}}',
+            method:'GET',
+            cache:false,
+            success:(Response)=>{
+                $("#hero-dash-order-count").html(Response + ' pending orders')
+            }
+        })
+    }
+    PendingOrders();
+
+    // const to load cart items
+    const LoadCartItems = () =>{
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url:'{{route('sa.get-cart-items-index')}}',
+            method:'GET',
+            cache:false,
+            success:(Response)=>{
+                $("#cart-items").html(Response)
+            }
+        })
+    }
+    LoadCartItems()
     {{--function SubCategoriesBasedOnCategory(category_id){--}}
     {{--    $.ajaxSetup({--}}
     {{--        headers: {--}}
