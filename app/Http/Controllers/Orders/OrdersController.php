@@ -8,6 +8,7 @@ use App\Models\Menu;
 use App\Models\Order;
 use App\Models\OrderStatus;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
+use Illuminate\Http\Request;
 
 class OrdersController extends Controller
 {
@@ -81,5 +82,27 @@ class OrdersController extends Controller
             'status' => 201,
             'msg' => 'Error: something went wrong'
         ]);
+    }
+
+    public function create(){
+        $orders = Order::latest()->get();
+        return view('super-admin.orders-list', compact('orders'));
+    }
+
+    public function edit(Request $request){
+        try {
+            $getOrder = Order::where('order_id', $request['order_id'])->get();
+            return response()->json([
+                'status' => 200,
+                'msg' => 'Data found',
+                'data' => $getOrder
+            ]);
+        } catch (\Exception $e){
+            return response()->json([
+                'status' => 201,
+                'msg' => 'Data not found. Error : ' . $e->getMessage(),
+                'data' => $getOrder
+            ]);
+        }
     }
 }
