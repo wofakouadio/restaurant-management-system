@@ -643,6 +643,95 @@
 
 
 {{---------------ORDERS---------------}}
+<!-- Place Item to Cart -->
+<div class="modal" id="AddToCart" tabindex="-1" role="dialog" aria-labelledby="modal-large" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="block block-rounded shadow-none mb-0">
+                <form method="POST" id="sa-add-to-cart-form">
+                    @csrf
+                    <div class="block-header block-header-default">
+                        <h3 class="block-title">Item</h3>
+                        <div class="block-options">
+                            <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="block-content block-content-full fs-sm">
+                        <div class="alert alert-danger order-alert"></div>
+                        <div class="row mb-4">
+                            <div class="col">
+                                <label class="form-label">Name</label>
+                                <input type="text" class="form-control form-control-lg" name="name" placeholder="Enter your menu.." readonly>
+                                <input name="menu_id" type="hidden">
+                                <span class="text-danger" id="name-err"></span>
+                            </div>
+                            <div class="col">
+                                <label class="form-label">Price</label>
+                                <input type="text" readonly name="price" class="form-control form-control-lg">
+                                <span class="text-danger" id="price-err"></span>
+                            </div>
+                            <div class="col">
+                                <label class="form-label">Quantity</label>
+                                <input name="quantity" type="text" class="form-control form-control-lg">
+                                <span class="text-danger" id="quantity-err"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="block-content block-content-full block-content-sm text-end border-top">
+                        <button type="button" class="btn btn-alt-secondary" data-bs-dismiss="modal">
+                            Close
+                        </button>
+                        <button type="submit" class="btn btn-alt-primary" name="btn-update" id="btn-update">
+                            <i class="fa fa-check opacity-50 me-1"></i> Add To Cart
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Item from Cart -->
+<div class="modal" id="DeleteCartItem" tabindex="-1" role="dialog" aria-labelledby="modal-large" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="block block-rounded shadow-none mb-0">
+                <form method="POST" id="sa-delete-to-cart-form">
+                    @csrf
+                    @method('DELETE')
+                    <div class="block-header block-header-default">
+                        <h3 class="block-title">Item</h3>
+                        <div class="block-options">
+                            <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="block-content block-content-full fs-sm">
+                        <div class="alert alert-danger cart-alert"></div>
+                        <div class="row mb-4">
+                            <div class="col">
+                                <h4 class="remove-item-from-cart-notice"></h4>
+                                <input name="cart_id" type="hidden">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="block-content block-content-full block-content-sm text-end border-top">
+                        <button type="button" class="btn btn-alt-secondary" data-bs-dismiss="modal">
+                            Close
+                        </button>
+                        <button type="submit" class="btn btn-alt-danger" name="btn-update" id="btn-update">
+                            <i class="fa fa-check opacity-50 me-1"></i> Delete from Cart
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Place New Order Modal -->
 <div class="modal" id="AddNewOrder" tabindex="-1" role="dialog" aria-labelledby="modal-large" aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
@@ -696,10 +785,9 @@
                                 <select class="form-select form-control form-control-lg" name="payment_method">
                                     <option value="">Choose</option>
                                     <option value="1">In-Store</option>
-                                    <option value="2">Cash on Delivery</option>
-                                    <option value="3">Mobile Money</option>
-                                    <option value="4">Visa/Master Card</option>
-                                    <option value="5">PayPal</option>
+                                    <option value="2">Mobile Money</option>
+                                    <option value="3">Visa/Master Card</option>
+                                    <option value="4">PayPal</option>
                                 </select>
                                 <span class="text-danger" id="payment-method-err"></span>
                             </div>
@@ -718,4 +806,80 @@
         </div>
     </div>
 </div>
+
+<!-- Payment for Order Modal -->
+<div class="modal" id="make-payment-order-modal" tabindex="-1" role="dialog" aria-labelledby="modal-large" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="block block-rounded shadow-none mb-0">
+                <form method="POST" id="sa-order-payment-form">
+                    @csrf
+                    <div class="block-header block-header-default">
+                        <h3 class="block-title">Payment Procession</h3>
+                        <div class="block-options">
+                            <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="block-content block-content-full fs-sm">
+                        <div class="alert alert-danger order-alert"></div>
+                        <div class="row mb-4">
+                            <div class="col">
+                                <label class="form-label">Name</label>
+                                <input type="text" class="form-control form-control-lg" name="name" placeholder="Enter your menu.." readonly>
+                                <input name="menu_id" type="hidden">
+                                <span class="text-danger" id="name-err"></span>
+                            </div>
+                            <div class="col">
+                                <label class="form-label">Price</label>
+                                <input type="text" readonly name="price" class="form-control form-control-lg">
+                                <span class="text-danger" id="price-err"></span>
+                            </div>
+                            <div class="col">
+                                <label class="form-label">Quantity</label>
+                                <input name="quantity" type="text" class="form-control form-control-lg">
+                                <span class="text-danger" id="quantity-err"></span>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col">
+                                <label class="form-label">Description</label>
+                                <textarea name="description" class="form-control form-control-lg" cols="10" rows="5"></textarea>
+                                <span class="text-danger" id="description-err"></span>
+                            </div>
+                            <div class="col">
+                                <label class="form-label">Remarks</label>
+                                <textarea name="remarks" class="form-control form-control-lg" cols="10" rows="5" placeholder="This can contain any notes given by the Customer or Customer name, contact, delivery address"></textarea>
+                                <span class="text-danger" id="remarks-err"></span>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col">
+                                <label class="form-label" for="mega-role">Payment Method</label>
+                                <select class="form-select form-control form-control-lg" name="payment_method">
+                                    <option value="">Choose</option>
+                                    <option value="1">In-Store</option>
+                                    <option value="2">Mobile Money</option>
+                                    <option value="3">Visa/Master Card</option>
+                                    <option value="4">PayPal</option>
+                                </select>
+                                <span class="text-danger" id="payment-method-err"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="block-content block-content-full block-content-sm text-end border-top">
+                        <button type="button" class="btn btn-alt-secondary" data-bs-dismiss="modal">
+                            Close
+                        </button>
+                        <button type="submit" class="btn btn-alt-primary" name="btn-update" id="btn-update">
+                            <i class="fa fa-check opacity-50 me-1"></i> Place Order
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 {{---------------ORDERS---------------}}
