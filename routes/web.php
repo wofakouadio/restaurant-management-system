@@ -4,7 +4,9 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Categories\CategoriesController;
 use App\Http\Controllers\categories\SubCategoriesController;
 use App\Http\Controllers\Menu\MenuController;
+use App\Http\Controllers\Orders\CartController;
 use App\Http\Controllers\Orders\OrdersController;
+use App\Http\Controllers\SuperAdmin\DashboardController;
 use App\Http\Controllers\SuperAdmin\SuperAdminController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -36,6 +38,7 @@ Route::middleware('super-admin')->prefix('super-admin')->group(function (){
 
     /** Dashboard **/
     Route::get('/', [SuperAdminController::class, 'index'])->name('sa.dashboard');
+    Route::get('/get-pending-orders', [DashboardController::class, 'pending_orders_counter'])->name('sa.pending-orders-counter');
 
     /** Users **/
     Route::get('/new-user', [SuperAdminController::class, 'new_user_page'])->name('sa.new-user');
@@ -77,10 +80,20 @@ Route::middleware('super-admin')->prefix('super-admin')->group(function (){
         Route::delete('/delete-menu', 'delete')->name('sa.delete-menu');
     });
 
+    /** Cart **/
+    Route::controller(CartController::class)->group(function(){
+        Route::get('/get-cart-items', 'index')->name('sa.get-cart-items-index');
+        Route::post('/add-item-to-cart', 'store')->name('sa.add-item-to-cart');
+        Route::get('/get-cart-data', 'edit')->name('sa.get-cart-data');
+        Route::delete('/delete-item-from-cart', 'delete')->name('sa.delete-item-from-cart');
+    });
+
     /** Orders **/
     Route::controller(OrdersController::class)->group(function(){
         Route::get('/new-order', 'index')->name('sa.new-order');
         Route::post('/add-new-order', 'store')->name('sa.add-new-order');
+        Route::get('/orders', 'create')->name('sa.orders-list');
+        Route::get('/get-order', 'edit')->name('sa.get-order');
     });
 
 });
