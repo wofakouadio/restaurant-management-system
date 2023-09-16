@@ -663,7 +663,7 @@
                         <div class="row mb-4">
                             <div class="col">
                                 <label class="form-label">Name</label>
-                                <input type="text" class="form-control form-control-lg" name="name" placeholder="Enter your menu..">
+                                <input type="text" class="form-control form-control-lg" name="name" placeholder="Enter your menu.." readonly>
                                 <input name="menu_id" type="hidden">
                                 <span class="text-danger" id="name-err"></span>
                             </div>
@@ -674,7 +674,7 @@
                             </div>
                             <div class="col">
                                 <label class="form-label">Quantity</label>
-                                <input name="quantity" type="number" class="form-control form-control-lg">
+                                <input name="quantity" type="text" class="form-control form-control-lg">
                                 <span class="text-danger" id="quantity-err"></span>
                             </div>
                         </div>
@@ -693,7 +693,7 @@
                         <div class="row mb-4">
                             <div class="col">
                                 <label class="form-label" for="mega-role">Payment Method</label>
-                                <select class="form-select form-control form-control-lg" name="payment-method">
+                                <select class="form-select form-control form-control-lg" name="payment_method">
                                     <option value="">Choose</option>
                                     <option value="1">In-Store</option>
                                     <option value="2">Cash on Delivery</option>
@@ -710,7 +710,7 @@
                             Close
                         </button>
                         <button type="submit" class="btn btn-alt-primary" name="btn-update" id="btn-update">
-                            <i class="fa fa-check opacity-50 me-1"></i> Update
+                            <i class="fa fa-check opacity-50 me-1"></i> Place Order
                         </button>
                     </div>
                 </form>
