@@ -4,9 +4,9 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Categories\CategoriesController;
 use App\Http\Controllers\categories\SubCategoriesController;
 use App\Http\Controllers\Menu\MenuController;
+use App\Http\Controllers\Orders\OrdersController;
 use App\Http\Controllers\SuperAdmin\SuperAdminController;
 use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -75,6 +75,11 @@ Route::middleware('super-admin')->prefix('super-admin')->group(function (){
         Route::get('/get-menu', 'edit')->name('sa.get-menu');
         Route::put('/update-menu', 'update')->name('sa.update-menu');
         Route::delete('/delete-menu', 'delete')->name('sa.delete-menu');
+    });
+
+    /** Orders **/
+    Route::controller(OrdersController::class)->group(function(){
+        Route::get('/new-order', 'index')->name('sa.new-order');
     });
 
 //    Route::post('/new-category', [CategoriesController::class, 'store'])->name('sa.new-category');
