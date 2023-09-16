@@ -78,7 +78,7 @@
 
                     <li class="nav-main-heading">Orders</li>
                     <li class="nav-main-item">
-                        <a class="nav-main-link">
+                        <a class="nav-main-link {{url()->current() == route('sa.new-order') ? 'active': ''}}" href="{{route('sa.new-order')}}">
                             <i class="nav-main-link-icon fa fa-bowl-food"></i>
                             <span class="nav-main-link-name">New</span>
                         </a>
