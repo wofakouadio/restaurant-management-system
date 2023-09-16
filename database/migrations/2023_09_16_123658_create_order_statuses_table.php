@@ -16,14 +16,14 @@ return new class extends Migration
             $table->string('order_id');
             $table->tinyInteger('placed_status');
             $table->dateTime('placed_status_timestamp');
-            $table->tinyInteger('confirmed_status');
-            $table->dateTime('confirmed_status_timestamp');
-            $table->tinyInteger('ready_status');
-            $table->dateTime('ready_status_timestamp');
-            $table->tinyInteger('delivered_status');
-            $table->dateTime('delivered_status_timestamp');
-            $table->tinyInteger('cancelled_status');
-            $table->dateTime('cancelled_status_timestamp');
+            $table->tinyInteger('confirmed_status')->nullable();
+            $table->dateTime('confirmed_status_timestamp')->nullable();
+            $table->tinyInteger('ready_status')->nullable();
+            $table->dateTime('ready_status_timestamp')->nullable();
+            $table->tinyInteger('delivered_status')->nullable();
+            $table->dateTime('delivered_status_timestamp')->nullable();
+            $table->tinyInteger('cancelled_status')->nullable();
+            $table->dateTime('cancelled_status_timestamp')->nullable();
         });
     }
 
