@@ -84,7 +84,7 @@
                         </a>
                     </li>
                     <li class="nav-main-item">
-                        <a class="nav-main-link">
+                        <a class="nav-main-link {{url()->current() == route('sa.orders-list') ? 'active': ''}}" href="{{route('sa.orders-list')}}">
                             <i class="nav-main-link-icon fa fa-list-alt"></i>
                             <span class="nav-main-link-name">List</span>
                         </a>
