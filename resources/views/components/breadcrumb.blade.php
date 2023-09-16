@@ -68,4 +68,14 @@
             </nav>
         </div>
     </div>
+@elseif(url()->current() === route('sa.orders-list'))
+    <div class="bg-body-light border-bottom">
+        <div class="content py-1 text-center">
+            <nav class="breadcrumb bg-body-light py-2 mb-0">
+                <span class="breadcrumb-item">Home</span>
+                <span class="breadcrumb-item">Orders</span>
+                <a class="breadcrumb-item active text-warning" href="{{route('sa.orders-list')}}">List</a>
+            </nav>
+        </div>
+    </div>
 @endif
