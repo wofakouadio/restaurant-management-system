@@ -648,7 +648,7 @@
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="block block-rounded shadow-none mb-0">
-                <form method="POST" enctype="multipart/form-data" id="sa-new-order-form">
+                <form method="POST" id="sa-new-order-form">
                     @csrf
                     <div class="block-header block-header-default">
                         <h3 class="block-title">New Order</h3>
@@ -659,7 +659,7 @@
                         </div>
                     </div>
                     <div class="block-content block-content-full fs-sm">
-                        <div class="alert alert-danger menu-alert"></div>
+                        <div class="alert alert-danger order-alert"></div>
                         <div class="row mb-4">
                             <div class="col">
                                 <label class="form-label">Name</label>
