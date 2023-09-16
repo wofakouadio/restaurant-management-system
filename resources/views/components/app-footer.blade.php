@@ -46,6 +46,6 @@
 @include('js-scripts.sa-categories-js')
 @include('js-scripts.sa-sub-categories-js')
 @include('js-scripts.sa-menus-js')
-    @include('js-scripts.sa-orders-js')
+@include('js-scripts.sa-orders-js')
 </body>
 </html>
