@@ -16,6 +16,7 @@ return new class extends Migration
             $table->longText('items');
             $table->string('total');
             $table->longText('remarks')->nullable();
+            $table->string('cashier');
             $table->string('payment_method');
             $table->tinyInteger('status')->default('0');
             $table->timestamps();
