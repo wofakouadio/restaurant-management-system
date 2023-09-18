@@ -180,7 +180,7 @@
         {{-- get menu data in order modal --}}
         $(document).on("show.bs.modal", "#AddNewOrder", (event)=>{
             let str = $(event.relatedTarget)
-            let menu_id = str.data("menu_id")
+            let user_id = str.data("user_id")
             let modal = $("#AddNewOrder")
             $.ajaxSetup({
                 headers: {
@@ -188,10 +188,10 @@
                 }
             });
             $.ajax({
-                url:'{{route('sa.get-menu')}}',
+                url:'{{route('sa.get-cart-items')}}',
                 method:'GET',
                 cache:false,
-                data: {menu_id:menu_id},
+                data: {user_id:user_id},
                 success:(response)=>{
                     let StringResults = JSON.stringify(response)
                     let DecodedResults = JSON.parse(StringResults)
@@ -202,10 +202,10 @@
                     }else{
                         modal.find(".order-alert").removeClass('alert-danger')
                         modal.find(".order-alert").removeClass('alert-warning')
-                        modal.find("input[name=menu_id]").val(menu_id)
-                        modal.find("input[name=name]").val(DecodedResults.data[0].name)
-                        modal.find("textarea[name=description]").val(DecodedResults.data[0].description)
-                        modal.find("input[name=price]").val(DecodedResults.data[0].price)
+                        modal.find("input[name=user_id]").val(user_id)
+                        let separator = '\n'
+                        modal.find("textarea[name=items]").html(DecodedResults.data.join(separator))
+                        modal.find("input[name=total]").val(DecodedResults.total)
                     }
                 }
             })
@@ -262,28 +262,16 @@
                         $("#sa-new-order-form .order-alert").show().addClass('alert-warning').html('Check in the forms for errors')
                     }
 
-                    if('name' in errorsCount){
-                        $("#sa-new-order-form #name-err").html(errorsCount.name[0])
+                    if('items' in errorsCount){
+                        $("#sa-new-order-form #items-err").html(errorsCount.items[0])
                     }else{
-                        $("#sa-new-order-form #name-err").html('')
+                        $("#sa-new-order-form #items-err").html('')
                     }
 
-                    if('quantity' in errorsCount){
-                        $("#sa-new-order-form #quantity-err").html(errorsCount.quantity[0])
+                    if('total' in errorsCount){
+                        $("#sa-new-order-form #total-err").html(errorsCount.total[0])
                     }else{
-                        $("#sa-new-order-form #quantity-err").html('')
-                    }
-
-                    if('description' in errorsCount){
-                        $("#sa-new-order-form #description-err").html(errorsCount.description[0])
-                    }else{
-                        $("#sa-new-order-form #description-err").html('')
-                    }
-
-                    if('price' in errorsCount){
-                        $("#sa-new-order-form #price-err").html(errorsCount.price[0])
-                    }else{
-                        $("#sa-new-order-form #price-err").html('')
+                        $("#sa-new-order-form #total-err").html('')
                     }
 
                     if('remarks' in errorsCount){
