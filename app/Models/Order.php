@@ -12,6 +12,7 @@ class Order extends Model
         'order_id',
         'items',
         'total',
+        'cashier',
         'payment_method',
         'status',
     ];
