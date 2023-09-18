@@ -749,35 +749,23 @@
                     </div>
                     <div class="block-content block-content-full fs-sm">
                         <div class="alert alert-danger order-alert"></div>
-                        <div class="row mb-4">
-                            <div class="col">
-                                <label class="form-label">Name</label>
-                                <input type="text" class="form-control form-control-lg" name="name" placeholder="Enter your menu.." readonly>
-                                <input name="menu_id" type="hidden">
-                                <span class="text-danger" id="name-err"></span>
-                            </div>
-                            <div class="col">
-                                <label class="form-label">Price</label>
-                                <input type="text" readonly name="price" class="form-control form-control-lg">
-                                <span class="text-danger" id="price-err"></span>
-                            </div>
-                            <div class="col">
-                                <label class="form-label">Quantity</label>
-                                <input name="quantity" type="text" class="form-control form-control-lg">
-                                <span class="text-danger" id="quantity-err"></span>
+                        <div class="form-group mb-4">
+                            <label class="form-label">Items</label>
+                            <textarea name="items" class="form-control form-control-lg" cols="10" rows="5" readonly></textarea>
+                            <input name="user_id" type="hidden">
+                            <span class="text-danger" id="items-err"></span>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label>Total</label>
+                            <div class="input-group">
+                                <span class="input-group-text">GH₵</span>
+                                <input type="text" class="form-control form-control-lg" id="example-group1-input2" name="total" readonly>
                             </div>
                         </div>
-                        <div class="row mb-4">
-                            <div class="col">
-                                <label class="form-label">Description</label>
-                                <textarea name="description" class="form-control form-control-lg" cols="10" rows="5"></textarea>
-                                <span class="text-danger" id="description-err"></span>
-                            </div>
-                            <div class="col">
-                                <label class="form-label">Remarks</label>
-                                <textarea name="remarks" class="form-control form-control-lg" cols="10" rows="5" placeholder="This can contain any notes given by the Customer or Customer name, contact, delivery address"></textarea>
-                                <span class="text-danger" id="remarks-err"></span>
-                            </div>
+                        <div class="form-group mb-4">
+                            <label class="form-label">Remarks</label>
+                            <textarea name="remarks" class="form-control form-control-lg" cols="10" rows="5" placeholder="This can contain any notes given by the Customer or Customer name, contact, delivery address"></textarea>
+                            <span class="text-danger" id="remarks-err"></span>
                         </div>
                         <div class="row mb-4">
                             <div class="col">
