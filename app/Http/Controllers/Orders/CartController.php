@@ -23,7 +23,7 @@ class CartController extends Controller
             $output .= '<th>Qty</th>';
             $output .= '<th>Subtotal</th>';
             $output .= '<th class="text-center" style="width: 100px;">Action</th>';
-            $output .= ' </tr>';
+            $output .= '</tr>';
             $output .= '</thead>';
             $output .= '<tbody>';
             $cartItems = Cart::all();
@@ -52,7 +52,7 @@ class CartController extends Controller
             $output .= '</tfoot>';
             $output .= '</table>';
             $output .= '<div class="mb-2">';
-            $output .= '<button class="btn btn-lg btn-alt-success fw-bold" type="button" data-bs-toggle="modal" data-bs-target="#AddNewOrder"> <i class="fa fa-money-bill-wheat"></i> Checkout';
+            $output .= '<button class="btn btn-lg btn-alt-success fw-bold" type="button" data-bs-toggle="modal" data-bs-target="#AddNewOrder" data-user_id="'.Auth::user()->userid.'"> <i class="fa fa-money-bill-wheat"></i> Checkout';
             $output .= '</button>';
             $output .= '</div>';
             $output .= '</div>';
@@ -80,6 +80,30 @@ class CartController extends Controller
             'status' => 201,
             'msg' => 'Error: something went wrong'
         ]);
+    }
+
+    public function show(Request $request){
+        $data = [];
+        $total = 0;
+        try {
+            $getCartItems = Cart::where('user_id', $request['user_id'])->get();
+            foreach ($getCartItems as $item){
+                $data[] = $item->menu_name . ' (' . $item->quantity .')' . ' @ ' . $item->subtotal;
+                $total += $item->subtotal;
+            }
+            return response()->json([
+                'status' => 200,
+                'msg' => 'Data found',
+                'data' => $data,
+                'total' => $total
+            ]);
+        } catch (\Exception $e){
+            return response()->json([
+                'status' => 201,
+                'msg' => 'Data not found. Error : ' . $e->getMessage(),
+                'data' => []
+            ]);
+        }
     }
 
     public function edit(Request $request){
@@ -111,6 +135,14 @@ class CartController extends Controller
             'status' => 201,
             'msg' => 'Error : Something went wrong'
         ]);
+    }
+
+    static function delete_user_items($user_id){
+        $Sql = Cart::where('user_id', $user_id)->delete();
+        if($Sql){
+            return true;
+        }
+        return false;
     }
 
 }
