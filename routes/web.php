@@ -85,7 +85,9 @@ Route::middleware('super-admin')->prefix('super-admin')->group(function (){
         Route::get('/get-cart-items', 'index')->name('sa.get-cart-items-index');
         Route::post('/add-item-to-cart', 'store')->name('sa.add-item-to-cart');
         Route::get('/get-cart-data', 'edit')->name('sa.get-cart-data');
+        Route::get('/get-cart-users-items', 'show')->name('sa.get-cart-items');
         Route::delete('/delete-item-from-cart', 'delete')->name('sa.delete-item-from-cart');
+        Route::delete('/delete-user-items-from-cart', 'delete_user_items')->name('sa.delete-user-items-from-cart');
     });
 
     /** Orders **/
