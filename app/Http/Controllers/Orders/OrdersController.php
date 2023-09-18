@@ -9,16 +9,18 @@ use App\Models\Order;
 use App\Models\OrderStatus;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrdersController extends Controller
 {
     public function index(){
-        $menus = Menu::where('status', 1)->get();
+//        $menus = Menu::where('status', 1)->get();
+        $menus = Menu::latest()->get();
         return view('super-admin.new-order', compact('menus'));
     }
 
     public function GenerateOrderID(){
-        return IdGenerator::generate(['table' => 'orders', 'field' => 'order_id', 'length' => 15, 'prefix' => date('ymdHisu')]);
+        return IdGenerator::generate(['table' => 'orders', 'field' => 'order_id', 'length'=>5, 'prefix' => date('ymdHisu')]);
     }
 
     public function PlacedOrderStatus($order_id){
@@ -63,16 +65,15 @@ class OrdersController extends Controller
         $request['order_id'] = $this->GenerateOrderID();
         $Sql = Order::create([
             'order_id' => $request['order_id'],
-            'menu_id' => $request['menu_id'],
-            'menu_name' => $request['name'],
-            'price' => $request['price'],
-            'quantity' => $request['quantity'],
-            'total_price' => $request['quantity'] * $request['price'],
+            'items' => $request['items'],
+            'total' => $request['total'],
+            'cashier' => Auth::user()->userid,
             'remarks' => $request['remarks'],
             'payment_method' => $request['payment_method']
         ]);
         if($Sql){
             $this->PlacedOrderStatus($request['order_id']);
+            CartController::delete_user_items(Auth::user()->userid);
             return response()->json([
                 'status' => 200,
                 'msg' => 'Order created successfully'
