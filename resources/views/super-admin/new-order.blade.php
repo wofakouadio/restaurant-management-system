@@ -15,20 +15,39 @@
                         <div class="row items-push">
                             @unless($menus->isEmpty())
                                 @foreach($menus as $menu)
-                                    <div class="col-md-4 animated fadeIn">
-                                        <div class="options-container">
-                                            <img class="img-fluid options-item" src="{{$menu->image ? asset('storage/'.$menu->image) : asset('images/no-image.png')}}" alt="">
-                                            <div class="options-overlay bg-black-75">
-                                                <div class="options-overlay-content">
-                                                    <h3 class="h2 text-white mb-1">{{$menu->name}}</h3>
-                                                    <h4 class="h3 text-white-75 mb-3">GH₵ {{$menu->price}}</h4>
-                                                    <a class="btn btn-sm btn-alt-primary" data-bs-toggle="modal" data-bs-target="#AddToCart" data-menu_id="{{$menu->menu_id}}">
-                                                        <i class="fa fa-pencil-alt opacity-50 me-1"></i> Add to Cart
-                                                    </a>
+                                    @if($menu->status === 1)
+                                        <div class="col-md-4 animated fadeIn ribbon ribbon-modern ribbon-success">
+                                            <div class="ribbon-box text-uppercase">available</div>
+                                            <div class="options-container">
+                                                <img class="img-fluid options-item" src="{{$menu->image ? asset('storage/'.$menu->image) : asset('images/no-image.png')}}" alt="">
+                                                <div class="options-overlay bg-black-75">
+                                                    <div class="options-overlay-content">
+                                                        <h3 class="h2 text-white mb-1">{{$menu->name}}</h3>
+                                                        <h4 class="h3 text-white-75 mb-3">GH₵ {{$menu->price}}</h4>
+                                                        <a class="btn btn-sm btn-alt-primary" data-bs-toggle="modal" data-bs-target="#AddToCart" data-user_id="{{$menu->menu_id}}">
+                                                            <i class="fa fa-pencil-alt opacity-50 me-1"></i> Add to Cart
+                                                        </a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    @else
+                                        <div class="col-md-4 animated fadeIn ribbon ribbon-modern ribbon-danger">
+                                            <div class="ribbon-box text-uppercase">out</div>
+                                            <div class="options-container">
+                                                <img class="img-fluid options-item" src="{{$menu->image ? asset('storage/'.$menu->image) : asset('images/no-image.png')}}" alt="">
+                                                <div class="options-overlay bg-black-75">
+                                                    <div class="options-overlay-content">
+                                                        <h3 class="h2 text-white mb-1">{{$menu->name}}</h3>
+                                                        <h4 class="h3 text-white-75 mb-3">GH₵ {{$menu->price}}</h4>
+                                                        <button class="btn btn-sm btn-alt-primary" disabled>
+                                                            <i class="fa fa-pencil-alt opacity-50 me-1"></i> Add to Cart
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
                                 @endforeach
                             @else
                                 <div class="col-md-12 animated fadeIn">
