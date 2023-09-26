@@ -203,8 +203,8 @@
                         modal.find(".order-alert").removeClass('alert-danger')
                         modal.find(".order-alert").removeClass('alert-warning')
                         modal.find("input[name=user_id]").val(user_id)
-                        let separator = '\n'
-                        modal.find("textarea[name=items]").html(DecodedResults.data.join(separator))
+                        modal.find("#items-table").html(DecodedResults.data)
+                        modal.find("input[name=items]").val(DecodedResults.encodedData)
                         modal.find("input[name=total]").val(DecodedResults.total)
                     }
                 }
@@ -301,13 +301,15 @@
                 }
             });
             $.ajax({
-                url:'{{route('sa.get-order')}}',
+                url:'{{route('sa.get-order-details')}}',
                 method:'GET',
                 cache:false,
                 data:{order_id:order_id},
                 success:(response)=>{
-                    let StringResults = JSON.stringify(response)
-                    let DecodedResults = JSON.parse(StringResults)
+                    modal.find("#order-details").html(response)
+                    // let StringResults = JSON.stringify(response)
+                    // let DecodedResults = JSON.parse(StringResults)
+                    // console.log(DecodedResults)
                     // if(DecodedResults.status === 201){
                     //     modal.find(".menu-alert").removeClass('alert-success')
                     //     modal.find(".menu-alert").removeClass('alert-warning')
@@ -326,6 +328,61 @@
                     //     modal.find("input[name=discount]").val(DecodedResults.data[0].discount)
                     //     modal.find("select[name=status]").val(DecodedResults.data[0].status)
                     // }
+                }
+            })
+        })
+
+        {{-- delete Order Modal --}}
+        $(document).on("show.bs.modal", "#cancel-order-modal", (event)=>{
+            let str = $(event.relatedTarget)
+            let order_id = str.data('order_id')
+            let modal = $('#cancel-order-modal')
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url:'{{route('sa.get-order')}}',
+                method:'GET',
+                cache:false,
+                data:{order_id:order_id},
+                success:(response)=>{
+                    let StringResults = JSON.stringify(response)
+                    let DecodedResults = JSON.parse(StringResults)
+                    if(DecodedResults.status === 201){
+                        modal.find(".order-alert").removeClass('alert-success')
+                        modal.find(".order-alert").removeClass('alert-warning')
+                        modal.find(".order-alert").show().addClass('alert-danger').html(DecodedResults.msg)
+                    }else{
+                        modal.find(".order-alert").removeClass('alert-danger')
+                        modal.find(".order-alert").removeClass('alert-warning')
+                        modal.find("input[name=order_id]").val(order_id)
+                        modal.find(".cancel-order-notice").html("Are you sure of cancelling Order Number " + order_id + " ?")
+                        modal.find("#items-details").html(DecodedResults.data)
+                    }
+                }
+            })
+        })
+
+        {{-- Delete Order Form --}}
+        $(document).on("submit", "#sa.cancel-order", (e)=>{
+            e.preventDefault()
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url:'{{route('sa.delete-order')}}',
+                method:'POST',
+                cache:false,
+                data:$("#sa-cancel-order").serialize(),
+                success:(Response)=>{
+
+                },
+                error:(Response)=>{
+                    
                 }
             })
         })
