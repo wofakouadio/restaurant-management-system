@@ -805,56 +805,13 @@
                     </div>
                     <div class="alert alert-danger order-alert"></div>
                     <div class="block-content block-content-full fs-sm" id="order-details">
-{{--                        <div class="row mb-4">--}}
-{{--                            <div class="col">--}}
-{{--                                <label class="form-label">Name</label>--}}
-{{--                                <input type="text" class="form-control form-control-lg" name="name" placeholder="Enter your menu.." readonly>--}}
-{{--                                <input name="menu_id" type="hidden">--}}
-{{--                                <span class="text-danger" id="name-err"></span>--}}
-{{--                            </div>--}}
-{{--                            <div class="col">--}}
-{{--                                <label class="form-label">Price</label>--}}
-{{--                                <input type="text" readonly name="price" class="form-control form-control-lg">--}}
-{{--                                <span class="text-danger" id="price-err"></span>--}}
-{{--                            </div>--}}
-{{--                            <div class="col">--}}
-{{--                                <label class="form-label">Quantity</label>--}}
-{{--                                <input name="quantity" type="text" class="form-control form-control-lg">--}}
-{{--                                <span class="text-danger" id="quantity-err"></span>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="row mb-4">--}}
-{{--                            <div class="col">--}}
-{{--                                <label class="form-label">Description</label>--}}
-{{--                                <textarea name="description" class="form-control form-control-lg" cols="10" rows="5"></textarea>--}}
-{{--                                <span class="text-danger" id="description-err"></span>--}}
-{{--                            </div>--}}
-{{--                            <div class="col">--}}
-{{--                                <label class="form-label">Remarks</label>--}}
-{{--                                <textarea name="remarks" class="form-control form-control-lg" cols="10" rows="5" placeholder="This can contain any notes given by the Customer or Customer name, contact, delivery address"></textarea>--}}
-{{--                                <span class="text-danger" id="remarks-err"></span>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="row mb-4">--}}
-{{--                            <div class="col">--}}
-{{--                                <label class="form-label" for="mega-role">Payment Method</label>--}}
-{{--                                <select class="form-select form-control form-control-lg" name="payment_method">--}}
-{{--                                    <option value="">Choose</option>--}}
-{{--                                    <option value="1">In-Store</option>--}}
-{{--                                    <option value="2">Mobile Money</option>--}}
-{{--                                    <option value="3">Visa/Master Card</option>--}}
-{{--                                    <option value="4">PayPal</option>--}}
-{{--                                </select>--}}
-{{--                                <span class="text-danger" id="payment-method-err"></span>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
                     </div>
                     <div class="block-content block-content-full block-content-sm text-end border-top">
                         <button type="button" class="btn btn-alt-secondary" data-bs-dismiss="modal">
                             Close
                         </button>
                         <button type="submit" class="btn btn-alt-primary" name="btn-update" id="btn-update">
-                            <i class="fa fa-check opacity-50 me-1"></i> Place Order
+                            <i class="fa fa-money-bill-transfer opacity-50 me-1"></i> Pay
                         </button>
                     </div>
                 </form>
