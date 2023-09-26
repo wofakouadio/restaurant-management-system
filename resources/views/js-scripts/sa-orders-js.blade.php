@@ -306,28 +306,28 @@
                 cache:false,
                 data:{order_id:order_id},
                 success:(response)=>{
-                    modal.find("#order-details").html(response)
-                    // let StringResults = JSON.stringify(response)
-                    // let DecodedResults = JSON.parse(StringResults)
-                    // console.log(DecodedResults)
-                    // if(DecodedResults.status === 201){
-                    //     modal.find(".menu-alert").removeClass('alert-success')
-                    //     modal.find(".menu-alert").removeClass('alert-warning')
-                    //     modal.find(".menu-alert").show().addClass('alert-danger').html(DecodedResults.msg)
-                    // }else{
-                    //     modal.find(".menu-alert").removeClass('alert-danger')
-                    //     modal.find(".menu-alert").removeClass('alert-warning')
-                    //     modal.find("input[name=menu_id]").val(menu_id)
-                    //     modal.find("input[name=name]").val(DecodedResults.data[0].name)
-                    //     modal.find("select[name=sub-cat-id]").val(DecodedResults.data[0].sub_cat_id)
-                    //     modal.find("input[name=fetched-picture]").val(DecodedResults.data[0].image)
-                    //     modal.find("select[name=cat-id]").val(DecodedResults.data[0].cat_id)
-                    //     modal.find("textarea[name=description]").val(DecodedResults.data[0].description)
-                    //     modal.find("textarea[name=extra]").val(DecodedResults.data[0].extra)
-                    //     modal.find("input[name=price]").val(DecodedResults.data[0].price)
-                    //     modal.find("input[name=discount]").val(DecodedResults.data[0].discount)
-                    //     modal.find("select[name=status]").val(DecodedResults.data[0].status)
-                    // }
+                    let StringResults = JSON.stringify(response)
+                    let DecodedResults = JSON.parse(StringResults)
+                    console.log(DecodedResults)
+                    if(DecodedResults.status === 201){
+                        modal.find(".order-alert").removeClass('alert-success')
+                        modal.find(".order-alert").removeClass('alert-warning')
+                        modal.find(".order-alert").show().addClass('alert-danger').html(DecodedResults.msg)
+                    }else{
+                        modal.find(".order-alert").removeClass('alert-danger')
+                        modal.find(".order-alert").removeClass('alert-warning')
+                        modal.find("#order-details").html(DecodedResults.data)
+                        // modal.find("input[name=menu_id]").val(menu_id)
+                        // modal.find("input[name=name]").val(DecodedResults.data[0].name)
+                        // modal.find("select[name=sub-cat-id]").val(DecodedResults.data[0].sub_cat_id)
+                        // modal.find("input[name=fetched-picture]").val(DecodedResults.data[0].image)
+                        // modal.find("select[name=cat-id]").val(DecodedResults.data[0].cat_id)
+                        // modal.find("textarea[name=description]").val(DecodedResults.data[0].description)
+                        // modal.find("textarea[name=extra]").val(DecodedResults.data[0].extra)
+                        // modal.find("input[name=price]").val(DecodedResults.data[0].price)
+                        // modal.find("input[name=discount]").val(DecodedResults.data[0].discount)
+                        // modal.find("select[name=status]").val(DecodedResults.data[0].status)
+                    }
                 }
             })
         })
