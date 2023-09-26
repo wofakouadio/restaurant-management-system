@@ -96,6 +96,9 @@ Route::middleware('super-admin')->prefix('super-admin')->group(function (){
         Route::post('/add-new-order', 'store')->name('sa.add-new-order');
         Route::get('/orders', 'create')->name('sa.orders-list');
         Route::get('/get-order', 'edit')->name('sa.get-order');
+        Route::get("/get-order-details", 'get_order_details')->name('sa.get-order-details');
+        Route::get('/order-processing-payment/{order_id}/', 'show');
+        Route::delete('/delete-order', 'delete')->name('sa.delete-order');
     });
 
 });
