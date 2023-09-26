@@ -71,28 +71,19 @@
                                 <div class="p-3 rounded-3 bg-body-light">
                                     <div class="mb-4">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control" id="payment-card-number" name="payment-card-number" placeholder="**** **** **** ****">
-                                            <label class="form-label" for="payment-card-number">Card Number</label>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-4">
-                                        <div class="col-6">
-                                            <div class="form-floating">
-                                                <input type="text" class="form-control" id="payment-expriration" name="payment-expriration" placeholder="MM / YY">
-                                                <label class="form-label" for="payment-expriration">MM / YY</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="form-floating">
-                                                <input type="text" class="form-control" id="payment-cvc" name="payment-cvc" placeholder="***">
-                                                <label class="form-label" for="payment-cvc">CVC</label>
-                                            </div>
+                                            <select class="form-select" id="example-select-floating" name="network" aria-label="Floating label select example">
+                                                <option selected="">Select an option</option>
+                                                <option value="MTN">MTN</option>
+                                                <option value="Vodafone">Vodafone</option>
+                                                <option value="AirtelTigo">AirtelTigo</option>
+                                            </select>
+                                            <label class="form-label" for="example-select-floating">Network Operator</label>
                                         </div>
                                     </div>
                                     <div>
                                         <div class="form-floating">
-                                            <input type="text" class="form-control" id="payment-card-name" name="payment-card-name" placeholder="Enter your name">
-                                            <label class="form-label" for="payment-card-name">Name on Card</label>
+                                            <input type="text" class="form-control" id="payment-card-name" name="momo-number" placeholder="Enter your mobile money number">
+                                            <label class="form-label" for="payment-card-name">Mobile Money Number</label>
                                         </div>
                                     </div>
                                 </div>
