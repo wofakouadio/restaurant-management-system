@@ -14,9 +14,6 @@
                     <thead>
                     <tr>
                         <th><i class="fa fa-arrow-down-up-across-line"></i></th>
-                        <th>Name</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
                         <th>Total</th>
                         <th>Date & Time</th>
                         <th>Status</th>
@@ -27,10 +24,7 @@
                     @foreach($orders as $order)
                         <tr>
                             <td class="fw-semibold">{{$order->order_id}}</td>
-                            <td class="fw-semibold">{{$order->menu_name}}</td>
-                            <td class="fw-semibold">GH₵ {{$order->price}}</td>
-                            <td class="fw-semibold">{{$order->quantity}}</td>
-                            <td class="fw-semibold">GH₵ {{$order->total_price}}</td>
+                            <td class="fw-semibold">GH₵ {{$order->total}}</td>
                             <td class="fw-semibold">{{$order->created_at}}</td>
                             <td class="fw-semibold">
                                 @if($order->status === 0)
@@ -52,9 +46,9 @@
                                             <i class="fa fa-money-bill-transfer"></i>
                                         </button>
                                     @else
-                                        <button type="button" class="btn btn-sm btn-secondary" title="Edit" data-bs-toggle="modal" data-bs-target="#edit-order-modal" data-order_id="{{$order->order_id}}">
-                                            <i class="fa fa-pencil-alt"></i>
-                                        </button>
+{{--                                        <button type="button" class="btn btn-sm btn-secondary" title="Edit" data-bs-toggle="modal" data-bs-target="#edit-order-modal" data-order_id="{{$order->order_id}}">--}}
+{{--                                            <i class="fa fa-pencil-alt"></i>--}}
+{{--                                        </button>--}}
                                     @endif
                                         <button type="button" title="Cancel" class="btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#cancel-order-modal" data-order_id="{{$order->order_id}}">
                                             <i class="fa fa-times"></i>
