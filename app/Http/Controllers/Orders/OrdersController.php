@@ -90,20 +90,116 @@ class OrdersController extends Controller
         return view('super-admin.orders-list', compact('orders'));
     }
 
+//    public function edit(Request $request){
+//        try {
+//            $getOrder = Order::where('order_id', $request['order_id'])->get();
+//            return response()->json([
+//                'status' => 200,
+//                'msg' => 'Data found',
+//                'data' => $getOrder
+//            ]);
+//        } catch (\Exception $e){
+//            return response()->json([
+//                'status' => 201,
+//                'msg' => 'Data not found. Error : ' . $e->getMessage(),
+//                'data' => $getOrder
+//            ]);
+//        }
+//    }
+
     public function edit(Request $request){
         try {
-            $getOrder = Order::where('order_id', $request['order_id'])->get();
+            $total = 0;
+            $output = '';
+            $counter = 1;
+            $getOrders = Order::select('items')->where('order_id', $request['order_id'])->get();
+            $output = '<table class="table table-sm table-vcenter">';
+            $output .= '<thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Item</th>
+                                    <th class="scope text-center">Qty</th>
+                                    <th class="scope text-center">Amount</th>
+                                </tr>
+                            </thead>';
+            $output .= '<tbody>';
+            $JsonData = json_decode($getOrders, true);
+            if(is_array($JsonData) && !empty($JsonData)){
+                $itemsJson = $JsonData[0]['items'];
+                $items = json_decode($itemsJson, true);
+                foreach ($items as $item){
+                    $output .= '<tr>';
+                    $output .= '<th>'.$counter++.'</th>';
+                    $output .= '<th>'.$item['item_name'].'</th>';
+                    $output .= '<th class="scope text-center">'.$item['item_quantity'].'</th>';
+                    $output .= '<th class="scope text-center">GH₵ '.$item['item_subtotal'].'</th>';
+                    $output .= '</tr>';
+                    $total += $item['item_subtotal'];
+                }
+                $output .= '<tr>';
+                $output .= '<th colspan="3"  class="scope text-center">TOTAL</th>';
+                $output .= '<th class="scope text-center fw-bold">GH₵ '.$total.'</th>';
+                $output .= '</tr>';
+            }
+            $output .= '</tbody>';
+            $output .= '<table>';
+
             return response()->json([
                 'status' => 200,
                 'msg' => 'Data found',
-                'data' => $getOrder
+                'data' => $output,
+                'total' => $total
             ]);
         } catch (\Exception $e){
             return response()->json([
                 'status' => 201,
                 'msg' => 'Data not found. Error : ' . $e->getMessage(),
-                'data' => $getOrder
+                'data' => []
             ]);
         }
+    }
+
+    public function get_order_details(Request $request){
+        $orderData = '';
+        $getOrder = Order::where('order_id', $request['order_id'])->get();
+        $output = '<table class="table table-sm table-vcenter">';
+            $output .= '<thead>
+                            <tr>
+                                <th>Items</th>
+                            </tr>
+                        </thead>';
+            $output .= '<tbody>';
+            $items = explode('\n', $getOrder[0]->items);
+            foreach ($items as $item){
+//                $itemsData = explode('@', $item);
+//                $output .=  implode('', $itemsData);
+                $output .= '<tr>
+                                <th scope="row">'.$item.'</th>
+                            </tr>';
+            }
+
+
+            $output .= '</tbody>';
+            $output .= '</table>';
+//        $output .= $getOrder;
+        return $output;
+    }
+
+    public function show(Order $order_id){
+
+    }
+
+    public function delete(Request $request){
+        $Sql = Order::where('order_id', $request['order_id'])->delete();
+        if($Sql){
+            return response()->json([
+                'status' => 200,
+                'msg' => 'Order deleted successfully'
+            ]);
+        }
+        return response()->json([
+            'status' => 201,
+            'msg' => 'Error : Something went wrong'
+        ]);
     }
 }
