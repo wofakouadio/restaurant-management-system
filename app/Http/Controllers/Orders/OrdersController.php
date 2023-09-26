@@ -59,6 +59,10 @@ class OrdersController extends Controller
         ]);
     }
 
+    public function delete_order_statuses($order_id){
+        return OrderStatus::where('order_id', $order_id)->delete();
+    }
+
 
     public function store(StoreOrderRequest $request){
         $orderValidated = $request->validated();
@@ -89,23 +93,6 @@ class OrdersController extends Controller
         $orders = Order::latest()->get();
         return view('super-admin.orders-list', compact('orders'));
     }
-
-//    public function edit(Request $request){
-//        try {
-//            $getOrder = Order::where('order_id', $request['order_id'])->get();
-//            return response()->json([
-//                'status' => 200,
-//                'msg' => 'Data found',
-//                'data' => $getOrder
-//            ]);
-//        } catch (\Exception $e){
-//            return response()->json([
-//                'status' => 201,
-//                'msg' => 'Data not found. Error : ' . $e->getMessage(),
-//                'data' => $getOrder
-//            ]);
-//        }
-//    }
 
     public function edit(Request $request){
         try {
@@ -196,6 +183,7 @@ class OrdersController extends Controller
                 'status' => 200,
                 'msg' => 'Order deleted successfully'
             ]);
+            $this->delete_order_statuses($request['order_id']);
         }
         return response()->json([
             'status' => 201,

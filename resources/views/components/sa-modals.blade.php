@@ -868,7 +868,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="block block-rounded shadow-none mb-0">
-                <form method="POST" id="sa-cancel-order">
+                <form method="POST" id="sa-cancel-order-form">
                     @csrf
                     @method('DELETE')
                     <div class="block-header block-header-default">

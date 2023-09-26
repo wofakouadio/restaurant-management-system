@@ -366,7 +366,7 @@
         })
 
         {{-- Delete Order Form --}}
-        $(document).on("submit", "#sa.cancel-order", (e)=>{
+        $(document).on("submit", "#sa-cancel-order-form", (e)=>{
             e.preventDefault()
             $.ajaxSetup({
                 headers: {
@@ -377,12 +377,44 @@
                 url:'{{route('sa.delete-order')}}',
                 method:'POST',
                 cache:false,
-                data:$("#sa-cancel-order").serialize(),
-                success:(Response)=>{
+                data:$("#sa-cancel-order-form").serialize(),
+                success:(response)=>{
+                    let StringResults = JSON.stringify(response)
+                    let DecodedResults = JSON.parse(StringResults)
+                    if(DecodedResults.status === 201){
+                        $("#sa-cancel-order-form .order-alert").removeClass('alert-success')
+                        $("#sa-cancel-order-form .order-alert").removeClass('alert-warning')
+                        $("#sa-cancel-order-form .order-alert").show().addClass('alert-danger').html(DecodedResults.msg)
+                    }else{
+                        $("#sa-cancel-order-form .order-alert").removeClass('alert-danger')
+                        $("#sa-cancel-order-form .order-alert").removeClass('alert-warning')
 
+                        Swal.fire({
+                            title: 'Notification',
+                            html: DecodedResults.msg,
+                            icon: 'success',
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                            confirmButtonText: 'Close',
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.reload()
+                            }
+                        })
+                    }
                 },
-                error:(Response)=>{
-                    
+                error:(response)=>{
+                    let StringResults = JSON.stringify(response)
+                    let DecodedResults = JSON.parse(StringResults)
+                    let errorsCount = DecodedResults.responseJSON.errors
+                    $("#sa-cancel-order-form .order-alert").removeClass('alert-success')
+                    $("#sa-cancel-order-form .order-alert").removeClass('alert-danger')
+
+                    if('message' in errorsCount){
+                        $("#sa-cancel-order-form .order-alert").show().addClass('alert-warning').html(errorsCount.message)
+                    }else{
+                        $("#sa-cancel-order-form .order-alert").show().addClass('alert-warning').html(errorsCount.message)
+                    }
                 }
             })
         })
