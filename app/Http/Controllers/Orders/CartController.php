@@ -85,16 +85,46 @@ class CartController extends Controller
     public function show(Request $request){
         $data = [];
         $total = 0;
+        $output = '';
+        $counter = 1;
+        $getCartItems = Cart::where('user_id', $request['user_id'])->get();
+        $output = '<table class="table table-sm table-vcenter">';
+        $output .= '<thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Item</th>
+                                <th class="scope text-center">Qty</th>
+                                <th class="scope text-center">Amount</th>
+                            </tr>
+                        </thead>';
+        $output .= '<tbody>';
+        foreach ($getCartItems as $item){
+            $output .= '<tr>';
+                $output .= '<th>'.$counter++.'</th>';
+                $output .= '<th>'.$item->menu_name.'</th>';
+                $output .= '<th class="scope text-center">'.$item->quantity.'</th>';
+                $output .= '<th class="scope text-center">GH₵ '.$item->subtotal.'</th>';
+            $output .= '</tr>';
+            $total += $item->subtotal;
+            $data[] = [
+                'item_name' => $item->menu_name,
+                'item_quantity' => $item->quantity,
+                'item_subtotal' => $item->subtotal,
+            ];
+        }
+        $output .= '<tr>';
+        $output .= '<th colspan="3"  class="scope text-center">TOTAL</th>';
+        $output .= '<th class="scope text-center fw-bold">GH₵ '.$total.'</th>';
+        $output .= '<tr>';
+        $output .= '</tbody>';
+        $output .= '<table>';
         try {
-            $getCartItems = Cart::where('user_id', $request['user_id'])->get();
-            foreach ($getCartItems as $item){
-                $data[] = $item->menu_name . ' (' . $item->quantity .')' . ' @ ' . $item->subtotal;
-                $total += $item->subtotal;
-            }
+
             return response()->json([
                 'status' => 200,
                 'msg' => 'Data found',
-                'data' => $data,
+                'encodedData' => json_encode($data),
+                'data' => $output,
                 'total' => $total
             ]);
         } catch (\Exception $e){
