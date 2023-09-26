@@ -1,81 +1,283 @@
-@extends('layouts/app')
-@push('title') <title>Super-Admin | Restaurant Management System</title> @endpush
+@extends('layouts/payment')
+@push('title') <title>Order Payment</title> @endpush
 @section('content')
-    <div class="content">
-        <div class="content-heading d-flex justify-content-between align-items-center">
-            <span>
-              New Order <small class="d-none d-sm-inline"> <i class="fa fa-bowl-food"></i> </small>
-            </span>
+    <div class="content content-boxed content-full overflow-hidden">
+        <!-- Header -->
+        <div class="py-5 text-center">
+            <a class="link-fx fw-bold" href="">
+                <div class="text-center">
+                    <img src="{{asset('favicon/android-chrome-512x512.png')}}" alt="logo" width="100px"/>
+                </div>
+            </a>
+            <h1 class="fs-3 fw-bold mt-4 mb-2">
+                Complete Payment
+            </h1>
         </div>
-        <!-- Mega Form -->
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="block block-rounded">
-                    <div class="block-content">
-                        <div class="row items-push">
-                            @unless($menus->isEmpty())
-                                @foreach($menus as $menu)
-                                    @if($menu->status === 1)
-                                        <div class="col-md-4 animated fadeIn ribbon ribbon-modern ribbon-success">
-                                            <div class="ribbon-box text-uppercase">available</div>
-                                            <div class="options-container">
-                                                <img class="img-fluid options-item" src="{{$menu->image ? asset('storage/'.$menu->image) : asset('images/no-image.png')}}" alt="">
-                                                <div class="options-overlay bg-black-75">
-                                                    <div class="options-overlay-content">
-                                                        <h3 class="h2 text-white mb-1">{{$menu->name}}</h3>
-                                                        <h4 class="h3 text-white-75 mb-3">GH₵ {{$menu->price}}</h4>
-                                                        <a class="btn btn-sm btn-alt-primary" data-bs-toggle="modal" data-bs-target="#AddToCart" data-menu_id="{{$menu->menu_id}}">
-                                                            <i class="fa fa-pencil-alt opacity-50 me-1"></i> Add to Cart
-                                                        </a>
+        <!-- END Header -->
+        <!-- Checkout -->
+        <form action="" method="POST" id="order-payment-form">
+            @csrf
+            <div class="row">
+                <!-- Order Info -->
+                <div class="col-xl-7">
+                    <!-- Payment -->
+                    <div class="block block-rounded">
+                        <div class="block-header block-header-default">
+                            <h3 class="block-title">
+                                Payment
+                            </h3>
+                        </div>
+                        @unless($paymentType->isEmpty())
+                            @php
+                                $DecodePaymentType = json_decode($paymentType, true);
+                                switch ($DecodePaymentType[0]['payment_method']){
+                                    case 1:
+                            @endphp
+                                        <div class="block-content block-content-full">
+                                            <div class="row g-3">
+                                                <div class="col-6 col-sm-6">
+                                                    <div class="form-check form-block">
+                                                        <input type="radio" class="form-check-input" id="checkout-payment-1" name="checkout-payment" checked> In-Store
+                                                        <label class="form-check-label bg-body-light" for="checkout-payment-1">
+                                                        <span class="d-block p-1 ratio ratio-21x9">
+                                                            <img src="{{asset('assets/media/payments/shopping.svg')}}" alt="payment-logo">
+                                                        </span>
+                                                        </label>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    @else
-                                        <div class="col-md-4 animated fadeIn ribbon ribbon-modern ribbon-danger">
-                                            <div class="ribbon-box text-uppercase">out</div>
-                                            <div class="options-container">
-                                                <img class="img-fluid options-item" src="{{$menu->image ? asset('storage/'.$menu->image) : asset('images/no-image.png')}}" alt="">
-                                                <div class="options-overlay bg-black-75">
-                                                    <div class="options-overlay-content">
-                                                        <h3 class="h2 text-white mb-1">{{$menu->name}}</h3>
-                                                        <h4 class="h3 text-white-75 mb-3">GH₵ {{$menu->price}}</h4>
-                                                        <button class="btn btn-sm btn-alt-primary" disabled>
-                                                            <i class="fa fa-pencil-alt opacity-50 me-1"></i> Add to Cart
-                                                        </button>
-                                                    </div>
+                                        <hr class="my-0">
+                            @php
+                                    break;
+                                case 2:
+                            @endphp
+                                    <div class="block-content block-content-full">
+                                        <div class="row g-3">
+                                            <div class="col-6 col-sm-6">
+                                                <div class="form-check form-block">
+                                                    <input type="radio" class="form-check-input" id="checkout-payment-2" name="checkout-payment" checked> Mobile Money
+                                                    <label class="form-check-label bg-body-light" for="checkout-payment-2">
+                                                                <span class="d-block p-1 ratio ratio-21x9">
+                                                                    <img src="{{asset('assets/media/payments/mobilemoney.jpg')}}" alt="payment-logo">
+                                                                </span>
+                                                    </label>
                                                 </div>
                                             </div>
                                         </div>
-                                    @endif
-                                @endforeach
-                            @else
-                                <div class="col-md-12 animated fadeIn">
-                                    <div class="alert alert-warning d-flex align-items-center" role="alert">
-                                        <i class="fa fa-fw fa-exclamation-triangle display-1 me-2"></i>
-                                        <h2 class="mb-0">
-                                            Menu is not available at the moment. Come back later!
-                                        </h2>
+                                    </div>
+                                    <hr class="my-0">
+                                    <div class="block-content block-content-full">
+                                <div class="p-3 rounded-3 bg-body-light">
+                                    <div class="mb-4">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="payment-card-number" name="payment-card-number" placeholder="**** **** **** ****">
+                                            <label class="form-label" for="payment-card-number">Card Number</label>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <div class="col-6">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control" id="payment-expriration" name="payment-expriration" placeholder="MM / YY">
+                                                <label class="form-label" for="payment-expriration">MM / YY</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control" id="payment-cvc" name="payment-cvc" placeholder="***">
+                                                <label class="form-label" for="payment-cvc">CVC</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="payment-card-name" name="payment-card-name" placeholder="Enter your name">
+                                            <label class="form-label" for="payment-card-name">Name on Card</label>
+                                        </div>
                                     </div>
                                 </div>
-                            @endunless
+                            </div>
+                            @php
+                                break;
+                                case 3:
+                            @endphp
+                                <div class="block-content block-content-full">
+                                    <div class="row g-3">
+                                        <div class="col-6 col-sm-6">
+                                            <div class="form-check form-block">
+                                                <input type="radio" class="form-check-input" id="checkout-payment-3" name="checkout-payment" checked> VisaCard/MasterCard/Debit Card
+                                                <label class="form-check-label bg-body-light" for="checkout-payment-3">
+                                                            <span class="d-block p-1 ratio ratio-21x9">
+                                                                <img src="{{asset('assets/media/payments/visa-master.png')}}" alt="payment-logo">
+                                                            </span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr class="my-0">
+                                <div class="block-content block-content-full">
+                                <div class="p-3 rounded-3 bg-body-light">
+                                    <div class="mb-4">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="payment-card-number" name="payment-card-number" placeholder="**** **** **** ****">
+                                            <label class="form-label" for="payment-card-number">Card Number</label>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <div class="col-6">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control" id="payment-expriration" name="payment-expriration" placeholder="MM / YY">
+                                                <label class="form-label" for="payment-expriration">MM / YY</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control" id="payment-cvc" name="payment-cvc" placeholder="***">
+                                                <label class="form-label" for="payment-cvc">CVC</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="payment-card-name" name="payment-card-name" placeholder="Enter your name">
+                                            <label class="form-label" for="payment-card-name">Name on Card</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @php
+                                break;
+                                case 4:
+                            @endphp
+                                <div class="block-content block-content-full">
+                                    <div class="row g-3">
+                                        <div class="col-6 col-sm-6">
+                                            <div class="form-check form-block">
+                                                <input type="radio" class="form-check-input" id="checkout-payment-4" name="checkout-payment" checked> PayPal
+                                                <label class="form-check-label bg-body-light" for="checkout-payment-4">
+                                                            <span class="d-block p-1 ratio ratio-21x9">
+                                                                <img src="{{asset('assets/media/payments/paypal.png')}}" alt="payment-logo">
+                                                            </span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr class="my-0">
+                                <div class="block-content block-content-full">
+                                <div class="p-3 rounded-3 bg-body-light">
+                                    <div class="mb-4">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="payment-card-number" name="payment-card-number" placeholder="**** **** **** ****">
+                                            <label class="form-label" for="payment-card-number">Card Number</label>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <div class="col-6">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control" id="payment-expriration" name="payment-expriration" placeholder="MM / YY">
+                                                <label class="form-label" for="payment-expriration">MM / YY</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control" id="payment-cvc" name="payment-cvc" placeholder="***">
+                                                <label class="form-label" for="payment-cvc">CVC</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="payment-card-name" name="payment-card-name" placeholder="Enter your name">
+                                            <label class="form-label" for="payment-card-name">Name on Card</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @php
+                                break;
+                                }
+                            @endphp
+                        @endunless
+                    </div>
+                    <!-- Payment -->
+                </div>
+                <!-- END Order Info -->
+
+                <!-- Order Summary -->
+                <div class="col-xl-5 order-xl-last">
+                    <div class="block block-rounded">
+                        <div class="block-header block-header-default">
+                            <h3 class="block-title">
+                                Order Summary
+                            </h3>
+                        </div>
+                        <div class="block-content block-content-full">
+                            <table class="table table-vcenter">
+                                <tbody>
+                                    @unless($orderDetails->isEmpty())
+                                        @php
+                                            $jsonData = json_decode($orderDetails, true);
+                                            if (is_array($jsonData) && !empty($jsonData)){
+                                                $itemJSON = $jsonData[0]['items'];
+                                                $items = json_decode($itemJSON, true);
+                                                foreach ($items as $item){
+                                        @endphp
+                                            <tr>
+                                                <td class="ps-0">
+                                                    <a class="fw-semibold text-warning" href="javascript:void(0)">{{$item['item_name']}}</a>
+                                                    <div class="fs-sm text-muted">Quantity : {{$item['item_quantity']}}</div>
+                                                </td>
+                                                <td class="pe-0 fw-medium text-end">GH₵ {{$item['item_subtotal']}}</td>
+                                            </tr>
+                                        @php
+                                                }
+                                            }
+                                        @endphp
+                                    @else
+
+                                    @endunless
+
+                                </tbody>
+                                <tbody>
+                                <tr>
+                                    <td class="ps-0 fw-medium">Total</td>
+                                @unless($orderTotal->isEmpty())
+                                    @php
+                                        $OrderTotal = json_decode($orderTotal, true);
+                                    @endphp
+                                        <td class="pe-0 fw-bold text-end">GH₵ {{$OrderTotal[0]['total']}}</td>
+                                        <input type="hidden" name="total" value="{{$OrderTotal[0]['total']}}">
+                                        <input type="hidden" name="order_id" value="{{$order_id}}">
+                                    @php
+                                    @endphp
+                                @endunless
+                                </tr>
+                                </tbody>
+                                <tbody>
+                                <tr>
+                                    @unless($remarks->isEmpty())
+                                        @php
+                                            $Remarks = json_decode($remarks, true);
+                                        @endphp
+                                        <td class="ps-0 fw-bold text-justify" colspan="2">Note: {{$Remarks[0]['remarks']}}</td>
+                                        @php
+                                        @endphp
+                                    @endunless
+                                </tr>
+                                </tbody>
+                            </table>
+                            <button type="submit" class="btn btn-warning w-100 py-3">
+                                <i class="fa fa-check opacity-50 me-1"></i>
+                                Complete Order
+                            </button>
                         </div>
                     </div>
                 </div>
+                <!-- END Order Summary -->
             </div>
-            <div class="col-lg-4">
-                <div class="block block-rounded">
-                    <div class="block-content">
-                        <h4 class="h3 fw-bold"><i class="fa fa-cart-shopping"></i> Cart</h4>
-                        <div id="cart-items">
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- END Mega Form -->
+        </form>
+        <!-- END Checkout -->
     </div>
-    <x-sa-modals/>
 @endsection
