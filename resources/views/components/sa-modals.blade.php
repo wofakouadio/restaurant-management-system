@@ -789,14 +789,14 @@
 </div>
 
 <!-- Payment for Order Modal -->
-<div class="modal" id="make-payment-order-modal" tabindex="-1" role="dialog" aria-labelledby="modal-large" aria-hidden="true">
+<div class="modal" id="view-order-modal" tabindex="-1" role="dialog" aria-labelledby="modal-large" aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="block block-rounded shadow-none mb-0">
                 <form method="POST" id="sa-order-payment-form">
                     @csrf
                     <div class="block-header block-header-default">
-                        <h3 class="block-title">Payment Procession</h3>
+                        <h3 class="block-title">Order Detail</h3>
                         <div class="block-options">
                             <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
                                 <i class="fa fa-times"></i>
@@ -804,14 +804,10 @@
                         </div>
                     </div>
                     <div class="alert alert-danger order-alert"></div>
-                    <div class="block-content block-content-full fs-sm" id="order-details">
-                    </div>
+                    <div class="block-content block-content-full fs-sm" id="order-details"></div>
                     <div class="block-content block-content-full block-content-sm text-end border-top">
                         <button type="button" class="btn btn-alt-secondary" data-bs-dismiss="modal">
                             Close
-                        </button>
-                        <button type="submit" class="btn btn-alt-primary" name="btn-update" id="btn-update">
-                            <i class="fa fa-money-bill-transfer opacity-50 me-1"></i> Pay
                         </button>
                     </div>
                 </form>
