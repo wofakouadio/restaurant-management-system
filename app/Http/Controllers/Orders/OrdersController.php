@@ -215,11 +215,11 @@ class OrdersController extends Controller
     public function delete(Request $request){
         $Sql = Order::where('order_id', $request['order_id'])->delete();
         if($Sql){
+            $this->delete_order_statuses($request['order_id']);
             return response()->json([
                 'status' => 200,
                 'msg' => 'Order deleted successfully'
             ]);
-            $this->delete_order_statuses($request['order_id']);
         }
         return response()->json([
             'status' => 201,
