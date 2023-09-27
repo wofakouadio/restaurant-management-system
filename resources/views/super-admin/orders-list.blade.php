@@ -45,11 +45,10 @@
                                         <a class="btn btn-sm btn-secondary" title="Payment" href="/super-admin/order-processing-payment/{{$order->order_id}}" target="_blank">
                                             <i class="fa fa-money-bill-transfer"></i>
                                         </a>
-                                    @else
-{{--                                        <button type="button" class="btn btn-sm btn-secondary" title="Edit" data-bs-toggle="modal" data-bs-target="#make-payment-order-modal" data-order_id="{{$order->order_id}}">--}}
-{{--                                            <i class="fa fa-pencil-alt"></i>--}}
-{{--                                        </button>--}}
                                     @endif
+                                        <button type="button" class="btn btn-sm btn-secondary" title="Edit" data-bs-toggle="modal" data-bs-target="#view-order-modal" data-order_id="{{$order->order_id}}">
+                                            <i class="fa fa-eye"></i>
+                                        </button>
                                         <button type="button" title="Cancel" class="btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#cancel-order-modal" data-order_id="{{$order->order_id}}">
                                             <i class="fa fa-times"></i>
                                         </button>
