@@ -3,35 +3,68 @@
 @section('content')
     <div class="content">
         <!-- Statistics -->
-        <div class="content-heading d-flex justify-content-between align-items-center">
-            <span>
-              Statistics <small class="d-none d-sm-inline">Awesome!</small>
-            </span>
-            <div class="dropdown">
-                <button type="button" class="btn btn-sm btn-alt-secondary" id="ecom-dashboard-stats-drop" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span>Today</span>
-                    <i class="fa fa-angle-down ms-1 opacity-50"></i>
-                </button>
-                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="ecom-dashboard-stats-drop">
-                    <a class="dropdown-item active" href="javascript:void(0)">
-                        <i class="fa fa-fw fa-calendar-alt opacity-50 me-1"></i> Today
-                    </a>
-                    <a class="dropdown-item" href="javascript:void(0)">
-                        <i class="fa fa-fw fa-calendar-alt opacity-50 me-1"></i> This Week
-                    </a>
-                    <a class="dropdown-item" href="javascript:void(0)">
-                        <i class="fa fa-fw fa-calendar-alt opacity-50 me-1"></i> This Month
-                    </a>
-                    <a class="dropdown-item" href="javascript:void(0)">
-                        <i class="fa fa-fw fa-calendar-alt opacity-50 me-1"></i> This Year
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="javascript:void(0)">
-                        <i class="far fa-fw fa-circle opacity-50 me-1"></i> All Time
-                    </a>
+        @if(auth()->user()->role_type === 4)
+{{--            @auth(auth()->user()->role_type === 4)--}}
+                <div class="content-heading d-flex justify-content-between align-items-center">
+                <span>
+                  Statistics <small class="d-none d-sm-inline">Awesome!</small>
+                </span>
+                    <div class="dropdown">
+                        <button type="button" class="btn btn-sm btn-alt-secondary" id="ecom-dashboard-stats-drop" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span>Today</span>
+                            <i class="fa fa-angle-down ms-1 opacity-50"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="ecom-dashboard-stats-drop">
+                            <a class="dropdown-item active" href="javascript:void(0)">
+                                <i class="fa fa-fw fa-calendar-alt opacity-50 me-1"></i> Today
+                            </a>
+                            <a class="dropdown-item" href="javascript:void(0)">
+                                <i class="fa fa-fw fa-calendar-alt opacity-50 me-1"></i> This Week
+                            </a>
+                            <a class="dropdown-item" href="javascript:void(0)">
+                                <i class="fa fa-fw fa-calendar-alt opacity-50 me-1"></i> This Month
+                            </a>
+                            <a class="dropdown-item" href="javascript:void(0)">
+                                <i class="fa fa-fw fa-calendar-alt opacity-50 me-1"></i> This Year
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="javascript:void(0)">
+                                <i class="far fa-fw fa-circle opacity-50 me-1"></i> All Time
+                            </a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+{{--            @endauth--}}
+        @endif
+{{--        <div class="content-heading d-flex justify-content-between align-items-center">--}}
+{{--            <span>--}}
+{{--              Statistics <small class="d-none d-sm-inline">Awesome!</small>--}}
+{{--            </span>--}}
+{{--            <div class="dropdown">--}}
+{{--                <button type="button" class="btn btn-sm btn-alt-secondary" id="ecom-dashboard-stats-drop" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
+{{--                    <span>Today</span>--}}
+{{--                    <i class="fa fa-angle-down ms-1 opacity-50"></i>--}}
+{{--                </button>--}}
+{{--                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="ecom-dashboard-stats-drop">--}}
+{{--                    <a class="dropdown-item active" href="javascript:void(0)">--}}
+{{--                        <i class="fa fa-fw fa-calendar-alt opacity-50 me-1"></i> Today--}}
+{{--                    </a>--}}
+{{--                    <a class="dropdown-item" href="javascript:void(0)">--}}
+{{--                        <i class="fa fa-fw fa-calendar-alt opacity-50 me-1"></i> This Week--}}
+{{--                    </a>--}}
+{{--                    <a class="dropdown-item" href="javascript:void(0)">--}}
+{{--                        <i class="fa fa-fw fa-calendar-alt opacity-50 me-1"></i> This Month--}}
+{{--                    </a>--}}
+{{--                    <a class="dropdown-item" href="javascript:void(0)">--}}
+{{--                        <i class="fa fa-fw fa-calendar-alt opacity-50 me-1"></i> This Year--}}
+{{--                    </a>--}}
+{{--                    <div class="dropdown-divider"></div>--}}
+{{--                    <a class="dropdown-item" href="javascript:void(0)">--}}
+{{--                        <i class="far fa-fw fa-circle opacity-50 me-1"></i> All Time--}}
+{{--                    </a>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
         <div class="row">
             <!-- Earnings -->
             <div class="col-md-6 col-xl-3">
