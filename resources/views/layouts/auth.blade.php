@@ -1,4 +1,4 @@
-<x-auth-header-script/>
+<x-auth.auth-header-script/>
 <!-- Page Container -->
 <div id="page-container" class="main-content-boxed">
 
@@ -7,4 +7,4 @@
     <!-- END Main Container -->
 </div>
 <!-- END Page Container -->
-<x-auth-footer-script/>
+<x-auth.auth-footer-script/>
