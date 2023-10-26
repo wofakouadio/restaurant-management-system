@@ -6,6 +6,7 @@ use App\Http\Controllers\categories\SubCategoriesController;
 use App\Http\Controllers\Menu\MenuController;
 use App\Http\Controllers\Orders\CartController;
 use App\Http\Controllers\Orders\OrdersController;
+use App\Http\Controllers\Orders\TransactionController;
 use App\Http\Controllers\SuperAdmin\DashboardController;
 use App\Http\Controllers\SuperAdmin\SuperAdminController;
 use App\Http\Controllers\UserController;
@@ -101,5 +102,9 @@ Route::middleware('super-admin')->prefix('super-admin')->group(function (){
         Route::delete('/delete-order', 'delete')->name('sa.delete-order');
     });
 
+    /** Transactions **/
+    Route::controller(TransactionController::class)->group(function (){
+        Route::post('/pay', 'store')->name('sa.pay');
+    });
 });
 
