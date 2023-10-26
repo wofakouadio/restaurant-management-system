@@ -7,7 +7,7 @@
     <!-- END Side Overlay -->
 
     <!-- Sidebar -->
-    <x-sidebar/>
+    <x-superadmin.sidebar/>
     <!-- END Sidebar -->
 
     <!-- Header -->
@@ -22,7 +22,7 @@
         <!-- END Hero -->
 
         <!-- Breadcrumb -->
-        <x-breadcrumb/>
+        <x-superadmin.breadcrumb/>
         <!-- END Breadcrumb -->
 
         <!-- Page Content -->
