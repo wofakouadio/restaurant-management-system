@@ -1,4 +1,4 @@
-@extends('layouts/app')
+@extends('layouts/admin-app')
 @push('title') <title>Administrator | Restaurant Management System</title> @endpush
 @section('content')
     <div class="content">
