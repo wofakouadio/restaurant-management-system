@@ -202,12 +202,14 @@ class OrdersController extends Controller
         $orderTotal = Order::select('total')->where('order_id', $request['order_id'])->get();
         $paymentType = Order::select('payment_method')->where('order_id', $request['order_id'])->get();
         $remarks = Order::select('remarks')->where('order_id', $request['order_id'])->get();
-//        return view('super-admin.order-processing-payment', compact('orderDetails', 'paymentType', 'orderTotal', 'remarks'));
+        $status = Order::select('status')->where('order_id', $request['order_id'])->get();
+
         return view('super-admin.order-processing-payment', [
             'orderDetails' => $orderDetails,
             'paymentType' => $paymentType,
             'orderTotal' => $orderTotal,
             'remarks' => $remarks,
+            'status' => $status,
             'order_id' => $request['order_id']
         ]);
     }
